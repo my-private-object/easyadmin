@@ -37,33 +37,33 @@
             <label class="layui-form-label required">起始IP</label>
             <div class="layui-input-block">
                 <input type="text" name="start_ip" class="layui-input" lay-verify="required" lay-reqtext="请输入起始IP" placeholder="请输入起始IP" value="">
-                
+                <tip>例：192.168.1.1</tip>
             </div>
-            <tip>例：192.168.1.1</tip>
+            
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label required">结束IP</label>
             <div class="layui-input-block">
                 <input type="text" name="end_ip" class="layui-input" lay-verify="required" lay-reqtext="请输入结束IP" placeholder="请输入结束IP" value="">
-                
+                <tip>例：192.168.1.10</tip>
             </div>
-            <tip>例：192.168.1.10</tip>
+            
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label required">起始时间</label>
             <div class="layui-input-block">
-                <input type="text" name="start_time" class="layui-input" lay-verify="required" lay-reqtext="请输入起始时间" placeholder="请输入起始时间" value="">
-               
+                <input type="text" name="start_time" class="layui-input lay_time" lay-verify="required" lay-reqtext="请输入起始时间" placeholder="请输入起始时间" value="">
+                <tip>例：20120202</tip>
             </div>
-            <tip>例：20120202</tip>
+            
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label required">结束时间</label>
             <div class="layui-input-block">
-                <input type="text" name="end_time" class="layui-input" lay-verify="required" lay-reqtext="请输入结束时间" placeholder="请输入结束时间" value="">
-                
+                <input type="text" name="end_time" class="layui-input lay_time" lay-verify="required" lay-reqtext="请输入结束时间" placeholder="请输入结束时间" value="">
+                <tip>例：20120205</tip>
             </div>
-            <tip>例：20120205</tip>
+            
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">分类权限</label>
@@ -88,3 +88,22 @@
 
     </form>
 </div>
+
+<script type="text/javascript">
+// 绑定多个 日期 控件
+layui.use('laydate', function(){
+
+    var laydate = layui.laydate;
+
+    lay('.lay_time').each(function() {
+        laydate.render({
+            elem: this
+            ,position: 'fixed'
+            ,trigger: 'click' //采用click弹出
+            ,zIndex: 99999999
+        });
+    });
+    
+});
+
+</script>
