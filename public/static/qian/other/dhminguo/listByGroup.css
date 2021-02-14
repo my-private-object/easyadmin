@@ -1,0 +1,103 @@
+@CHARSET "UTF-8";
+.content {
+	_height: 750px;
+    width: 1020px;
+}
+
+.pageLeft {
+	float: left;
+    margin-left: 15px;
+    width: 250px;
+}
+.notice_left{
+	float: left;
+	width: 100%;
+}
+.left_title{
+	float: left;
+	width: 100%;
+	height: 30px;
+	background-color: #846843;
+}
+.left_title span{
+	float:left;
+	margin-left:8px;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	line-height: 30px;
+	color: #fff;	
+}
+.notice_nr{
+	float: left;
+	width: 100%;
+}
+
+.pageRight {
+	float: right;
+	width: 715px;
+	margin-right: 10px;
+}
+/*左边类型列表样式*/
+.left_menu{background: #fff;float:left;width:90%;padding: 5% ;border-bottom: 1px solid #cecece;}
+.left_menu a{font-family: "微软雅黑";font-size: 13px;}
+.left_menu a:hover{text-decoration: none;color: #cecece;}
+#select{text-decoration: none;color: #cecece;}
+/*右边顶上导航样式*/
+.word_dqwz{border-bottom: 1px solid #ececec;color: #4f4f4f;font-size: 14px;height: 30px;width: 715px;}
+.word_dqwz b{float:left;margin-left:12px;line-height: 30px;}
+.word_dqwz b{font-family: "微软雅黑";font-size: 13px;}
+.word_dqwz a{font-family: "微软雅黑";font-size: 13px;}
+/*二级页面右边内容区域样式*/
+.notice_list{float:left;width: 100%;}
+.notice_list li{float:left;height:60px;width:96%;padding:2% }
+.notice_list li:hover{background-color:#ececec;}
+.hid{font-size: 15px;margin-bottom:10px;color:#007bb7}
+.noList{padding-left: 290px;padding-top: 60px;}
+.noList span{font-family: "微软雅黑";font-size: 18px;color: #bebebe;}
+/*  图片 */
+.boxgrid { width: 215px; height: 200px; float:left; background:#161613;overflow: hidden; position: relative; }
+.boxgrid img { position: absolute; top: 0; left: 0; border: 0; }
+.boxgrid p {float:left;width:90%;padding:5%;  color:#afafaf;font:10pt; }
+.boxcaption b{float:left;font-size:13px;font-weight:normal;width:90%;padding:5% 5% 0; color:#FFF; }
+.boxcaption { 
+	float: left; 
+	position: absolute; 
+	background: #000; 
+	height: 200px; 
+	width: 100%; 
+	opacity: 0.8; 
+/* For IE 5-7 */
+	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+/* For IE 8 */
+	-MS-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; 
+}
+.captionfull .boxcaption { top: 130px; left: 0; }
+.pic_btn{
+	background: #007BB7;
+	padding: 5px 15px;
+	top: 100px;
+	left: 80px; 
+	padding: 5px 15px; 
+	position: absolute;
+	letter-spacing: 2px;
+	text-decoration: none;
+	color:#fff
+}
+
+/*  视频 */
+.videobox { 
+	top:70px;
+	left:0;
+	float: left; 
+	position: absolute; 
+	background: #000; 
+	height: 30px; 
+	width: 160px; 
+	opacity: 0.6; 
+/* For IE 5-7 */
+	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+/* For IE 8 */
+	-MS-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)"; 
+}
+
+

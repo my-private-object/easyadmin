@@ -1,0 +1,364 @@
+@charset "utf-8";
+/* CSS Document */
+body, dl, dd, ul, li, ol, h1, h2, h3, h4, h5, h6, form, p {
+    margin: 0;
+}
+
+ul, li, ol, dl, dd, dt, input, span {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+body, td, th, h1, h2, h3, h4, h5, h6 {
+    font-size: 14px;
+    font-family: "微软雅黑", "宋体", Arial, Helvetica, sans-serif;
+    color: #333333;
+}
+
+a img, img {
+    border: none;
+}
+
+a {
+    text-decoration: none;
+    color: #000000;
+    outline: none;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #a32002;
+}
+
+em, var {
+    font-style: normal;
+}
+
+input, textarea, button {
+    outline: none;
+    vertical-align: middle;
+}
+
+input::-moz-focus-inner {
+    border: 0;
+}
+
+select, td {
+    vertical-align: middle;
+}
+
+.clearcss {
+    clear: both;
+    _display: inline;
+}
+
+.openGPDF {
+    float: left;
+    width: 80px;
+    height: 20px;
+}
+
+.zoomOut {
+    width: 80px;
+    height: 20px;
+    display: inline-block;
+    background: url("../images/zoomOut.png") no-repeat 3px;
+}
+
+.zoomIn {
+    width: 70px;
+    height: 20px;
+    display: inline-block;
+    background: url("../images/zoomIn.png") no-repeat 3px;
+}
+
+.pageNum {
+    width: 50px;
+    height: 20px;
+    display: inline-block;
+}
+
+.nextPage {
+    width: 70px;
+    height: 20px;
+    display: inline-block;
+}
+
+.previousPage {
+    width: 100px;
+    height: 20px;
+    display: inline-block;
+}
+
+.zoomRate {
+    width: 50px;
+    height: 20px;
+    display: inline-block;
+}
+
+.loading {
+    width: 120px;
+    height: 20px;
+    display: inline-block;
+}
+
+.showStateLog {
+    float: left;
+    width: 200px;
+    height: 20px;
+    display: inline-block;
+}
+
+.platformtitle {
+    /*float:center;text-align:center; padding:0 5px;font-size:42px; color:red;vertical-align:text-top*/
+}
+
+.loginarea {
+    float: right;
+    width: 320px;
+    height: 24px;
+    border: 1px;
+    vertical-align: text-top
+}
+
+.logoutarea {
+    float: right;
+    width: 320px;
+    height: 24px;
+    border: 1px;
+    vertical-align: text-top;
+}
+
+.gpdfReadPlus {
+    position: relative;
+    color: #000;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.readPlusImage {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.contentImage {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    background: #FFF;
+    width: 100%;
+    height: 100%;
+}
+
+.contentImage img {
+    width: 100%;
+    height: 100%;
+}
+
+.readPlusText {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    filter: alpha(Opacity=50);
+    -moz-opacity: 0.1;
+    opacity: 0.3;
+    z-index: 101;
+}
+
+.loginname, .loginpassword {
+    float: left;
+    width: 120px;
+    height: 20px;
+    line-height: 20px;
+    border: #e8ddcb solid 1px;
+    padding-left: 30px;
+    margin: 0 auto 25px;
+}
+
+.loginname input, .loginpassword input {
+    float: left;
+    width: 120px;
+    height: 20px;
+    line-height: 20px;
+    color: #d4b190;
+    font-family: "微软雅黑";
+    font-size: 14px;
+    border: 0;
+}
+
+.loginbtn {
+    float: left;
+    display: block;
+    width: 80px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    margin: 0 auto 10px;
+    background: #b37c47;
+    font-size: 16px;
+    color: #ffffff;
+    font-family: "微软雅黑";
+    cursor: pointer;
+    border: 0;
+}
+
+.loginUserName {
+    float: left;
+    width: 120px;
+    height: 20px;
+    line-height: 20px;
+    border: #e8ddcb solid 1px;
+    padding-left: 30px;
+    margin: 0 auto 25px;
+}
+
+.logoutUser {
+    float: left;
+    width: 120px;
+    height: 20px;
+    line-height: 20px;
+    border: #e8ddcb solid 1px;
+    padding-left: 30px;
+    margin: 0 auto 25px;
+}
+
+.toolbar {
+    text-align: center;
+}
+
+.toolbar .btn {
+    width: 80px;
+    height: 20px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.titleSpanWait {
+    position: absolute;
+}
+
+.pageMove {
+    width: 3px;
+    height: 100%;
+    box-shadow: 0 2px 10px 0 #92A6C0;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.pageMoveNext {
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 330;
+}
+
+.pageMovePrevious {
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 330;
+}
+
+.turnPage {
+    position: absolute;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    background: url("../images/turnpage.png") no-repeat;
+
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    transition: All 0.4s ease-in-out;
+
+}
+
+.leftTop {
+    left: -50px;
+    top: -50px;
+}
+
+.leftTopMask {
+    left: 0;
+    top: 0;
+}
+
+.rightTop {
+    right: -50px;
+    top: -50px;
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.rightTopMask {
+    right: 0;
+    top: 0;
+}
+
+.leftBottom {
+    left: -50px;
+    bottom: -50px;
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+
+.leftBottomMask {
+    left: 0;
+    bottom: 0;
+}
+
+.rightBottom {
+    right: -50px;
+    bottom: -50px;
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.rightBottomMask {
+    right: 0;
+    bottom: 0;
+}
+
+.turnPageMask {
+    position: absolute;
+    z-index: 1002;
+    width: 20%;
+    height: 26%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+html, body, .base_bg, .base_logo, .reader_list, .book-view, .gd_right, #bookWrap {
+    height: 100% !important;
+}
+
+#bookWrap {
+    overflow: auto;
+}
+
+body {
+    overflow: hidden;
+}
+
+#bookWrap {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+#box_content{
+	cursor: move;
+}

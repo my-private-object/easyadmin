@@ -1,0 +1,83 @@
+@charset "utf-8";
+
+/* - michael */
+/*body,td,th ,input {color:#232222;font: 14px/1.5 "Microsoft YaHei" ,tahoma,arial,'Hiragino Sans GB',\5b8b\4f53,sans-serif ! important;}*/
+body, p, form, ul, li, dl, dt, dd, h1, h2, h3, h4, h5, h6 { padding:0; margin:0; }
+body {background: url(../images/base_bg2.png)}
+.clear { font-size:0; width:0; height:0; clear:both; overflow:hidden;}
+img { border:0; }
+a { color:#232222; text-decoration:none; }
+html a:hover { text-decoration:underline; color:#f33100; }
+input,select{outline:medium;}
+a:focus { outline: none; }
+img { border:none; }
+ul, li { list-style:none; }
+body, html { width:100%; height:100%; }
+.f-st{ font-family:'宋体';}
+.fl { float:left; }
+.fr { float:right; }
+.k1000{ width:1000px; margin-left:auto;margin-right:auto;}
+.ta-c{ text-align:center;}
+.ta-r{ text-align:right;}
+.ta-l{ text-align:left;}
+.f12{ font-size:12px;}
+.f13{ font-size:13px;}
+.f14{ font-size:14px;}
+.f16{ font-size:16px;}
+.f24{font-size:24px;}
+.f25{font-size:25px;}
+.cur{ cursor:pointer;}
+.dth{ text-decoration:line-through}
+.ml5{ margin-left:5px;}
+.mt-1{ margin-top:-1px;}
+.mt5{ margin-top:5px;}
+.mr5{ margin-right:5px;}
+.mt8{ margin-top:8px;}
+.mr10{ margin-right:10px;}
+.mt10{ margin-top:10px;}
+.mt14{ margin-top:14px;}
+.mt15{ margin-top:15px;}
+.mb5{ margin-bottom:5px;}
+.mb10{ margin-bottom:10px;}
+.mt20{ margin-top:20px;}
+.ml10{ margin-left:10px;}
+.ml15{ margin-left:15px;}
+.ml20{ margin-left:20px;}
+.ml25{ margin-left:25px;}
+.mr20{ margin-right:20px;}
+.mr25{ margin-right:25px;}
+.ovh{ overflow:hidden;}
+.dsi{ display:inline}
+.bold { font-weight:bold;}
+.nobold {font-weight:normal;}
+
+.pt5{ padding-top:5px;}
+.pt10{ padding-top:10px;}
+.pb5{ padding-bottom:5px;}
+.pb10{ padding-bottom:10px;}
+.pb15{ padding-bottom:15px;}
+.pb20{ padding-bottom:20px;}
+.p20{ padding:20px;}
+
+.fcff{ color:#fff;}
+.fc3c{ color:#3c2615;}
+.fc99{ color:#999;}
+.fc66{ color:#666;}
+.fce1{ color:#e10000;}
+.fc0a{ color:#0a0aa4;}
+
+.fwryh{font-family:"微软雅黑"}
+.fhwxh{font-family:"华文细黑"}
+.fc33{color:#333}
+.dsb{ display:inline-block;}
+.dsbone{display: inline-block;top: 9px;left: 199px;position: relative;}
+.titel{position: absolute;top: -21px;font-size: 40px;font-family: "楷体";width: 390px;left: 237px;}
+.f18{ font-size:18px;}
+.f20{ font-size:20px;}
+.mt3{ margin-top:3px;}
+.mt8{ margin-top:8px;}
+.mt6{ margin-top:6px;}
+.mt30{ margin-top:30px;}
+.f30{font-size:30px;}
+.zoom{ overflow:hidden; zoom:1;}
+.gray {-webkit-filter: grayscale(100%);-moz-filter: grayscale(100%);-ms-filter: grayscale(

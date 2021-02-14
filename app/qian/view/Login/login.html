@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>中国近代文献资源全库</title>
+<link rel="icon" href=" " type="image/x-icon" />
+<link rel="shortcut icon" href=" " type="image/x-icon" />
+<link href="__STATIC__/qian/css/login_style.css" rel="stylesheet" type="text/css" media="all" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<!-- -->
+<script>
+	var __links = document.querySelectorAll('a');
+	function __linkClick(e) { 
+		parent.window.postMessage(this.href, '*');
+	};	
+	for (var i = 0, l = __links.length; i < l; i++) {
+		if ( __links[i].getAttribute('data-t') == '_blank' ) { 
+			__links[i].addEventListener('click', __linkClick, false);
+		}
+	}
+</script>
+<script src="__STATIC__/qian/js/jquery.min.js"></script>
+<script>
+$(document).ready(function(c) {
+	$('.alert-close').on('click', function(c){
+		$('.message').fadeOut('slow', function(c){
+	  		$('.message').remove();
+		});
+	});	  
+});
+</script>
+</head>
+<body>
+<!-- contact-form -->	
+<div class="message warning">
+<div class="inset">
+	<div class="login-head">
+		<h1 style="margin-left: 90px;">中国近代文献资源全库</h1>
+		<!-- <div class="alert-close"> </div> 			 -->
+	</div>
+	<!-- <div style="float:left; margin-top: 30px; margin-left: 35px; font-size: 12px; color: gray;" >
+		用户登陆
+	</div> -->
+		<form action="{:url('login.Login/userVerify')}" method="post" >
+			<li>
+				<input name="username" type="text" class="text" value="账号" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '账号';}"><a href="#" class=" icon user"></a>
+			</li>
+				<div class="clear"> </div>
+			<li>
+				<input name="password" type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"> <a href="#" class="icon lock"></a>
+			</li>
+			<div class="clear"> </div>
+			<div class="submit">
+				<input type="submit" value="登 陆" >
+				<h4 style="float:right; margin-right: 20px;"><a href="#">试用申请</a></h4>
+						  <div class="clear">  </div>	
+			</div>
+				
+		</form>
+		</div>					
+	</div>
+	</div>
+	<div class="clear"> </div>
+<!--- footer --->
+<div class="footer">
+	<p>ICP:XXXXXXXXXX</p>
+</div>
+
+</body>
+</html>

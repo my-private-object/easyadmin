@@ -1,0 +1,258 @@
+<link rel="stylesheet" href="__STATIC__/admin/css/welcome.css?v={:time()}" media="all">
+<div class="layuimini-container">
+    <div class="layuimini-main">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md8">
+                <div class="layui-row layui-col-space15">
+                    <!-- <div class="layui-col-md6">
+                        <div class="layui-card">
+                            <div class="layui-card-header"><i class="fa fa-warning icon"></i>数据统计</div>
+                            <div class="layui-card-body">
+                                <div class="welcome-module">
+                                    <div class="layui-row layui-col-space10">
+                                        <div class="layui-col-xs6">
+                                            <div class="panel layui-bg-number">
+                                                <div class="panel-body">
+                                                    <div class="panel-title">
+                                                        <span class="label pull-right layui-bg-blue">实时</span>
+                                                        <h5>用户统计</h5>
+                                                    </div>
+                                                    <div class="panel-content">
+                                                        <h1 class="no-margins">1234</h1>
+                                                        <small>当前分类总记录数</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-col-xs6">
+                                            <div class="panel layui-bg-number">
+                                                <div class="panel-body">
+                                                    <div class="panel-title">
+                                                        <span class="label pull-right layui-bg-cyan">实时</span>
+                                                        <h5>商品统计</h5>
+                                                    </div>
+                                                    <div class="panel-content">
+                                                        <h1 class="no-margins">1234</h1>
+                                                        <small>当前分类总记录数</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-col-xs6">
+                                            <div class="panel layui-bg-number">
+                                                <div class="panel-body">
+                                                    <div class="panel-title">
+                                                        <span class="label pull-right layui-bg-orange">实时</span>
+                                                        <h5>浏览统计</h5>
+                                                    </div>
+                                                    <div class="panel-content">
+                                                        <h1 class="no-margins">1234</h1>
+                                                        <small>当前分类总记录数</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-col-xs6">
+                                            <div class="panel layui-bg-number">
+                                                <div class="panel-body">
+                                                    <div class="panel-title">
+                                                        <span class="label pull-right layui-bg-green">实时</span>
+                                                        <h5>订单统计</h5>
+                                                    </div>
+                                                    <div class="panel-content">
+                                                        <h1 class="no-margins">1234</h1>
+                                                        <small>当前分类总记录数</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- <div class="layui-col-md6">
+                        <div class="layui-card">
+                            <div class="layui-card-header"><i class="fa fa-credit-card icon icon-blue"></i>快捷入口</div>
+                            <div class="layui-card-body">
+                                <div class="welcome-module">
+                                    <div class="layui-row layui-col-space10 layuimini-qiuck">
+
+                                        {foreach $quicks as $vo}
+                                        <div class="layui-col-xs3 layuimini-qiuck-module">
+                                            <a layuimini-content-href="{:url($vo['href'])}" data-title="{$vo['title']}">
+                                                <i class="{$vo['icon']|raw}"></i>
+                                                <cite>{$vo['title']}</cite>
+                                            </a>
+                                        </div>
+                                        {/foreach}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> -->
+                   <!--  <div class="layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header"><i class="fa fa-line-chart icon"></i>*****</div>
+                            <div class="layui-card-body">
+                                <div id="echarts-records" style="width: 100%;min-height:500px"></div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+
+            <!-- <div class="layui-col-md4">
+
+                <div class="layui-card">
+                    <div class="layui-card-header"><i class="fa fa-bullhorn icon icon-tip"></i>*****</div>
+                    <div class="layui-card-body layui-text">
+                        <div class="layuimini-notice">
+                            <div class="layuimini-notice-title">*****<</div>
+                            <div class="layuimini-notice-extra">2010-12-05 14:28</div>
+                            <div class="layuimini-notice-content layui-hide">
+                                *****<br>
+                                *****<<br>
+                                *****<<br>
+                                *****<-awesome图标库的完美支持。<br>
+                                *****<<br>
+                                *****<<br>
+                                *****<<br>
+                                *****<<br>
+                            </div>
+                        </div>
+                        <div class="layuimini-notice">
+                            <div class="layuimini-notice-title">*****<</div>
+                            <div class="layuimini-notice-extra">2010-12-05 14:28</div>
+                            <div class="layuimini-notice-content layui-hide">
+                                *****<<br>
+                                *****<<br>
+                                *****<<br>
+                                *****<-awesome图标库的完美支持。<br>
+                                *****<<br>
+                                *****<<br>
+                                *****<<br>
+                                *****<<br>
+                            </div>
+                        </div>
+                        <div class="layuimini-notice">
+                            <div class="layuimini-notice-title">*****<</div>
+                            <div class="layuimini-notice-extra">2010-12-05 14:28</div>
+                            <div class="layuimini-notice-content layui-hide">
+                                *****<<br>
+                                *****<<br>
+                                *****<<br>
+                                *****<-awesome图标库的完美支持。<br>
+                                *****<<br>
+                                *****<<br>
+                                *****<<br>
+                                *****<<br>
+                            </div>
+                        </div>
+                        <div class="layuimini-notice">
+                            <div class="layuimini-notice-title">*****<</div>
+                            <div class="layuimini-notice-extra">2010-12-05 14:28</div>
+                            <div class="layuimini-notice-content layui-hide">
+                                *****<<br>
+                                *****<<br>
+                                *****<<br>
+                                *****<-awesome图标库的完美支持。<br>
+                                *****<<br>
+                                *****<<br>
+                                *****<<br>
+                                *****<<br>
+                            </div>
+                        </div>
+                       <div class="layuimini-notice">
+                            <div class="layuimini-notice-title">*****<</div>
+                            <div class="layuimini-notice-extra">2010-12-05 14:28</div>
+                            <div class="layuimini-notice-content layui-hide">
+                                *****<<br>
+                                *****<<br>
+                                *****<<br>
+                                *****<-awesome图标库的完美支持。<br>
+                                *****<<br>
+                                *****<<br>
+                                *****<<br>
+                                *****<<br>
+                            </div>
+                        </div>
+                        <div class="layuimini-notice">
+                            <div class="layuimini-notice-title">*****<</div>
+                            <div class="layuimini-notice-extra">2010-12-05 14:28</div>
+                            <div class="layuimini-notice-content layui-hide">
+                                *****<<br>
+                                *****<<br>
+                                *****<<br>
+                                *****<-awesome图标库的完美支持。<br>
+                                *****<<br>
+                                *****<<br>
+                                *****<<br>
+                                *****<<br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-card">
+                    <div class="layui-card-header"><i class="fa fa-fire icon"></i>版本信息</div>
+                    <div class="layui-card-body layui-text">
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="100">
+                                <col>
+                            </colgroup>
+                            <tbody>
+                            <tr>
+                                <td>后台管理系统</td>
+                                <td>
+                                    AMDIN
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>当前版本</td>
+                                <td>v1.0.0</td>
+                            </tr>
+                            <tr>
+                                <td>无</td>
+                                <td>无</td>
+                            </tr>
+                            <tr>
+                                <td>Gitee</td>
+                                <td style="padding-bottom: 0;">
+                                    <div class="layui-btn-container">
+                                        <a href="https://gitee.com/zhongshaofa/easyadmin" style="margin-right: 15px"><img src="https://gitee.com/zhongshaofa/easyadmin/badge/star.svg?theme=dark" alt="star"></a>
+                                        <a href="https://gitee.com/zhongshaofa/easyadmin"><img src="https://gitee.com/zhongshaofa/easyadmin/badge/fork.svg?theme=dark" alt="fork"></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Github</td>
+                                <td style="padding-bottom: 0;">
+                                    <div class="layui-btn-container">
+                                        <iframe src="https://ghbtns.com/github-btn.html?user=zhongshaofa&repo=easyadmin&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
+                                        <iframe src="https://ghbtns.com/github-btn.html?user=zhongshaofa&repo=easyadmin&type=fork&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="layui-card">
+                    <div class="layui-card-header"><i class="fa fa-paper-plane-o icon"></i>66666</div>
+                    <div class="layui-card-body layui-text layadmin-text">
+                        <p>11111<a class="layui-btn layui-btn-xs layui-btn-danger" target="_blank" href="#">66666</a></p>
+                        <p>22222</p>
+                        <p>33333</p>
+                        <p class="layui-red">44444</p>
+                    </div>
+                </div>
+
+            </div> -->
+        </div>
+    </div>
+</div>
