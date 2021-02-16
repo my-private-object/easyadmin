@@ -71,11 +71,9 @@ class Admin extends AdminController
     {
         // 如果是访问HTML页面
         if (!$this->request->isAjax()) {
-            $cate = new \app\admin\model\GujiCateHigh();
-            $cate_list = $cate->where(['pid'=>'0'])->select()->toArray();
-            // echo '<pre>';
-            // var_dump($cate_list);
-            // echo '</pre>';
+            // 获取分类列表
+            $cate = new \app\admin\model\GujiCateHigh();            
+            $cate_list = $cate->where(['pid'=>'0'])->select();
             $this->assign('cate_list',$cate_list);
             return $this->fetch();
         }
@@ -83,10 +81,10 @@ class Admin extends AdminController
         // 如果是提交表单
         $post = $this->request->post();
 
-        echo '<pre>';
-        var_dump($post);
-        echo '</pre>';
-
+        // echo '<pre>';
+        // var_dump($post);
+        // echo '</pre>';
+        
         // 判断是否为IP
         if($post['is_ip'] == 1){
             if(!filter_var($post['start_ip'], FILTER_VALIDATE_IP))
@@ -95,8 +93,26 @@ class Admin extends AdminController
                 $this->error('非法结束IP');    
         }
 
+        // 处理分类数组为字符串
+        if (isset($post['cate_ids'])) {
+            $cate_str = '';
+            $cate_name = '';
+            foreach ($post['cate_ids'] as $key=>$value) {
+                $cate_str .= $key.',';
+                $cate_name .= $value.',';
+            }
 
-        return 123;
+            $cate_str = rtrim($cate_str, ',');
+            $cate_name = rtrim($cate_name, ',');
+            $post['is_cate'] = $cate_str;
+            $post['is_cate_name'] = $cate_name;
+        } else {
+            $post['is_cate'] = 0;
+            $post['is_cate_name'] = 0;
+        }
+
+        // 清除分类列表
+        unset($post['cate_ids']);
 
         // 添加数据
         $authIds = $this->request->post('auth_ids', []);
@@ -119,26 +135,72 @@ class Admin extends AdminController
     {
         $row = $this->model->find($id);
         empty($row) && $this->error('数据不存在');
-        if ($this->request->isAjax()) {
-            $post = $this->request->post();
-            $authIds = $this->request->post('auth_ids', []);
-            $post['auth_ids'] = implode(',', array_keys($authIds));
-            $rule = [];
-            $this->validate($post, $rule);
-            if (isset($row['password'])) {
-                unset($row['password']);
-            }
-            try {
-                $save = $row->save($post);
-                TriggerService::updateMenu($id);
-            } catch (\Exception $e) {
-                $this->error('保存失败');
-            }
-            $save ? $this->success('保存成功') : $this->error('保存失败');
+
+        // 如果是访问HTML页面
+        if (!$this->request->isAjax()) {
+
+            // 获取分类信息
+            $cate = new \app\admin\model\GujiCateHigh();            
+            $cate_list = $cate->where(['pid'=>'0'])->select();
+            $row['cate_list'] = $cate_list;
+
+            // 获取已选分类信息
+            $op_cate_list = explode(',', $row['is_cate']);
+            $row['op_cate_list'] = $op_cate_list;
+
+            $row->auth_ids = explode(',', $row->auth_ids);
+            $this->assign('row', $row);
+            return $this->fetch();
+
         }
-        $row->auth_ids = explode(',', $row->auth_ids);
-        $this->assign('row', $row);
-        return $this->fetch();
+
+        // 如果是提交表单
+        $post = $this->request->post();
+
+        // 判断是否为IP
+        if($post['is_ip'] == 1){
+            if(!filter_var($post['start_ip'], FILTER_VALIDATE_IP))
+                $this->error('非法起始IP');
+            if(!filter_var($post['end_ip'], FILTER_VALIDATE_IP))
+                $this->error('非法结束IP');    
+        }
+
+        // 处理分类数组为字符串
+        if (isset($post['cate_ids'])) {
+            $cate_str = '';
+            $cate_name = '';
+            foreach ($post['cate_ids'] as $key=>$value) {
+                $cate_str .= $key.',';
+                $cate_name .= $value.',';
+            }
+
+            $cate_str = rtrim($cate_str, ',');
+            $cate_name = rtrim($cate_name, ',');
+            $post['is_cate'] = $cate_str;
+            $post['is_cate_name'] = $cate_name;
+        } else {
+            $post['is_cate'] = 0;
+            $post['is_cate_name'] = 0;
+        }
+
+        // 清除分类列表
+        unset($post['cate_ids']);
+        
+        $authIds = $this->request->post('auth_ids', []);
+        $post['auth_ids'] = implode(',', array_keys($authIds));
+        $rule = [];
+        $this->validate($post, $rule);
+        if (isset($row['password'])) {
+            unset($row['password']);
+        }
+        try {
+            $save = $row->save($post);
+            TriggerService::updateMenu($id);
+        } catch (\Exception $e) {
+            $this->error('保存失败');
+        }
+        $save ? $this->success('保存成功') : $this->error('保存失败');
+        
     }
 
     /**

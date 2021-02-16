@@ -19,11 +19,89 @@
                 <tip>填写登录账户。</tip>
             </div>
         </div>
+         <div class="layui-form-item">
+            <label class="layui-form-label required">是否试用</label>
+            <div class="layui-input-block">
+                {if condition="$row['is_trial'] eq 1" /}
+                    <input type="radio" name="is_trial" value="1" title="是" checked="" >
+                    <input type="radio" name="is_trial" value="0" title="否">
+                {else /}
+                    <input type="radio" name="is_trial" value="1" title="是" >
+                    <input type="radio" name="is_trial" value="0" title="否" checked="">
+                {/if}
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">IP控制</label>
+            <div class="layui-input-block">
+                {if condition="$row['is_ip'] eq 1" /}
+                    <input type="radio" name="is_ip" value="1" title="是" checked="">
+                    <input type="radio" name="is_ip" value="0" title="否">
+                {else /}
+                    <input type="radio" name="is_ip" value="1" title="是">
+                    <input type="radio" name="is_ip" value="0" title="否" checked="">
+                {/if}
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">起始IP</label>
+            <div class="layui-input-block">
+                <input type="text" name="start_ip" class="layui-input" lay-verify="required" lay-reqtext="请输入起始IP" placeholder="请输入起始IP" value="{$row.start_ip|default=''}">
+                <tip>例：192.168.1.1</tip>
+            </div>
+            
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">结束IP</label>
+            <div class="layui-input-block">
+                <input type="text" name="end_ip" class="layui-input" lay-verify="required" lay-reqtext="请输入结束IP" placeholder="请输入结束IP" value="{$row.end_ip|default=''}">
+                <tip>例：192.168.1.10</tip>
+            </div>
+            
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">起始时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="start_time" class="layui-input lay_time" lay-verify="required" lay-reqtext="请输入起始时间" placeholder="请输入起始时间" value="{$row.start_time|default=''}">
+                <tip>例：20120202</tip>
+            </div>
+            
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">结束时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="end_time" class="layui-input lay_time" lay-verify="required" lay-reqtext="请输入结束时间" placeholder="请输入结束时间" value="{$row.end_time|default=''}">
+                <tip>例：20120205</tip>
+            </div>
+            
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">分类权限</label>
+            <div class="layui-input-block">
+                {foreach $row['cate_list'] as $val}
 
+                    <?php $is_true = 0; ?>
+                    <!-- 判断分类是否存被选中 -->
+                    {foreach $row['op_cate_list'] as $op_val}
+                    {if condition="$val['id'] eq $op_val" /}
+                        <?php $is_true = 1; break; ?>
+                    {/if}
+                    {/foreach}
+
+                    <!-- 选中和未选中两种状态 -->
+                    {if condition="$is_true eq 1"}
+                    <input type="checkbox" name="cate_ids[{$val['id']}]" lay-skin="primary" title="{$val['title']}" value="{$val['title']}" checked>
+                    {else /}
+                    <input type="checkbox" name="cate_ids[{$val['id']}]" lay-skin="primary" title="{$val['title']}" value="{$val['title']}">
+                    {/if}
+
+                {/foreach}
+            </div>
+        </div>
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">备注信息</label>
             <div class="layui-input-block">
-                <textarea name="remark" class="layui-textarea" placeholder="请输入备注信息">{$row.username|default=''}</textarea>
+                <textarea name="remark" class="layui-textarea" placeholder="请输入备注信息">{$row.remark|default=''}</textarea>
             </div>
         </div>
 
@@ -35,3 +113,22 @@
 
     </form>
 </div>
+
+<script type="text/javascript">
+// 绑定多个 日期 控件
+layui.use('laydate', function(){
+
+    var laydate = layui.laydate;
+
+    lay('.lay_time').each(function() {
+        laydate.render({
+            elem: this
+            ,position: 'fixed'
+            ,trigger: 'click' //采用click弹出
+            ,zIndex: 99999999
+        });
+    });
+    
+});
+
+</script>

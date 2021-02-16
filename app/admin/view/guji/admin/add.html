@@ -69,7 +69,7 @@
             <label class="layui-form-label">分类权限</label>
             <div class="layui-input-block">
                 {foreach cate_list as $val}
-                <input type="checkbox" name="cate_ids[{$val['id']}]" lay-skin="primary" title="{$val['title']}">
+                <input type="checkbox" name="cate_ids[{$val['id']}]" lay-skin="primary" title="{$val['title']}" value="{$val['title']}" >
                 {/foreach}
             </div>
         </div>
