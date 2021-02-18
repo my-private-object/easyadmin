@@ -115,7 +115,7 @@ input[type="text"]:hover, input[type="password"]:hover{
 	padding-top:1em;
 }
 input[type="submit"] {
-	float: left;
+	/*float: left;*/
 	color: #fff;
 	cursor: pointer;
 	font-weight: 900;
@@ -217,7 +217,7 @@ input[type="submit"]:hover {
 		width: 33%;
 	}
 	.footer {
-		left: 43%;
+		left: 33%;
 	}
 }
 @media (max-width:1024px){
