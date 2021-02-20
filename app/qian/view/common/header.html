@@ -1,56 +1,104 @@
+
+<link rel="stylesheet" type="text/css" href="__STATIC__/qian/css/m_login.css" />
+
 <div id="header" >
-		<div id="header_left">
-			<marquee id="scrollbar" direction="right" >欢迎使用中国近代文献资源全库</marquee>
-		</div>
-		<div id="header_right" >
-
-			<span id="ontrial">收藏本页</span>
-			<span id="register">注册</h3>
-			<span>|</span>
-			<span>登陆</span>
-		</div>
-	</div> 
-	<div id="entrance" >
-		<a href="{:url('/gj/index')}">
-		<div id="entrance_left" >
-
-		</div>
-		</a>
-		<div id="entrance_right" >
-			<div class="new_search" >
-				<div id="complex_search" >
-					<div id="resources_search" >资源搜索</div>
-					<div id="search_box" ><input id="search_key" type="text" maxlength="45" /></div>
-					<div id="search_button" >
-						<span class="search" style="cursor:pointer;" href="{:url('/gj/index/searchPage')}">搜索</span>
-					</div>
-					<div id="high_search" ><a href="{:url('/gj/index/highSearchPage')}">高级搜索</a></div>
-				</div>
-				<div id="all_field" >
-					<ul id="checkbox-d">
-						<li style="margin-top:3px;" >全部字段:</a></li>
-						<li style="margin-left:1px;" ><input name="Fruit" type="checkbox" value="1" />标题 </li>
-						<li><input name="Fruit" type="checkbox" value="2" />作者 </li>
-						<li><input name="Fruit" type="checkbox" value="3" />副标题 </li>
-						<li><input name="Fruit" type="checkbox" value="4" />日期 </li>			
-					</ul>
-				</div>
-				<div id="hot_search" >
-					<ul>
-						<li>热门搜索:</li>
-						<li style="margin-left:1px;" ><a href="#">中国</a></li>
-						<li><a href="#">近代</a></li>
-						<li><a href="#">文学</a></li>
-						<li><a href="#">宗教</a></li>
-					</ul>
-				</div>
-			</div>
-		<ul class="top_list" >
-			{volist name="$data['top_list']" id="vo"}
-				<li>
-					<li><span class="cate_id" style="cursor:pointer" href="{:url('/gj/index/sidepage')}" value="{$vo['id']}" is_top="">{$vo['title']}</span></li>
-				</li>
-			{/volist}
-		</ul>
-		</div>
+	<div id="header_left">
+		<marquee id="scrollbar" direction="right" >欢迎使用中国近代文献资源全库</marquee>
 	</div>
+	<div id="header_right" >
+
+		<span id="ontrial">收藏本页</span>
+		<span id="register">注册</h3>
+		<span>|</span>
+		<span class="m_login" style="cursor:pointer;">登陆</span>
+	</div>
+</div> 
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	$(".m_login").click(function() {
+		$("#login").show();
+	});
+	$(".close").click(function() {		 
+		$("#login").css("display","none");				 
+	});		
+});
+
+</script>
+
+<!-- <input type="button" value="登陆" class="div1" > -->
+
+<div id="login">
+	<div id="login_header">
+		<spen id="login_name" >登陆</spen>
+		<img src="__STATIC__/qian/images/m_login/close.png" alt="" class="close">
+	</div>
+	<div class="user">账 号: <input type="text" name="user" class="text" /> </div>
+	<div class="pass">密 码: <input type="password" name="pass" class="text" /></div>
+	<hr>
+	<div class="button">
+		<input type="submit" onclick="m_login();" value="登陆" class="submit">
+		<input type="submit" value="注册" class="submit">
+	</div>
+	<!-- <div class="other">注册新用户 | 忘记密码?</div> -->
+</div>
+
+<script type="text/javascript">
+
+
+	// 登陆
+	function m_login(){
+
+		var url = getRootPath()+'/gj/index/m_login';
+		var data = {
+			'username': $("input[name='user']").val(),
+			'password': $("input[name='pass']").val()
+		}
+
+		common_ajax(url, data);
+
+	}
+
+	// 公共 ajax
+	function common_ajax(url, data) {
+
+		var status = false;
+
+		$.ajax({
+			url:url,
+			type:'post',
+			dataType:'json',
+			data:data,
+			success:function(result){
+				// console.log(result);
+				window.location.reload() //刷新当前页面.
+			},
+			error:function(){
+				console.log('error: 206');
+			}
+		})
+
+	}
+
+	//很多时候我们需要使用当前项目路径，但是如果把项目路径写死，会带来很多不便，此时就需要自动获取项目路径。
+	//我们可以根据jquery来进行自动获取项目路径，获取方法如下
+	function getRootPath() {
+	    // 1、获取当前全路径，如： http://localhost:8080/springmvc/page/frame/test.html
+	    var curWwwPath = window.location.href;
+	    // 获取当前相对路径： /springmvc/page/frame/test.html
+	    var pathName = window.location.pathname;    // 获取主机地址,如： http://localhost:8080
+	    var local = curWwwPath.substring(0,curWwwPath.indexOf(pathName));  
+	    // 获取带"/"的项目名，如：/springmvc  
+	    // var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);  
+	    // var rootPath = local + projectName;  
+	    // return rootPath; 
+	    return local;
+	}
+
+
+</script>
+
+
+

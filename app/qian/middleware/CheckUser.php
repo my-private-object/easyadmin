@@ -83,23 +83,27 @@ class CheckUser
             // 可以这样简单判断IP
             if( $ip >= $ip_start && $ip <= $ip_end ){
                 $is_ip = true;
-                echo 'IP在此范围内';
+                // echo 'IP在此范围内';
                 // 判断时间是否在允许范围内
                 $now_time = time();//当前时间戳
                 $start_time = strtotime($value['start_time']);//起始时间
                 $end_time = strtotime($value['end_time']);//结束时间
+                // echo date('y-m-d h:i:s', $now_time);
+                // echo date('y-m-d h:i:s', $start_time);
+                // echo date('y-m-d h:i:s', $end_time);
                 if ( $now_time >= $start_time && $now_time <= $end_time ){
-                    echo '时间有效';
+                    // echo '时间有效';
                     $is_time = true;
                 }
             }
 
             if ( $is_ip === true && $is_time === true ) {
+                // echo $value['username'];
                 return true;
             }
 
         }
-
+        
         return false;
 
     }

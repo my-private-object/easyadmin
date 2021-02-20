@@ -149,6 +149,19 @@ class Index {
     }
 
 
+    // 用户登陆
+    public function m_login() {
+
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        
+        if ( $username == 123 && $password == 321 ) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 
 
 
