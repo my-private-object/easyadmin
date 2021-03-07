@@ -5,7 +5,7 @@
 	<meta charset="utf-8" />
 	<link rel="icon" href=" " type="image/x-icon" />
 	<link rel="shortcut icon" href=" " type="image/x-icon" />
-	<link rel="stylesheet" type="text/css" href="__STATIC__/qian/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="__STATIC__/qian/css/style_updaste.css" />
 	<link rel="stylesheet" type="text/css" href="__STATIC__/qian/css/last.css" />
 	<script type="text/javascript" src="__STATIC__/qian/js/jquery.min.js" charset="utf-8"></script>
 	<style>
@@ -26,11 +26,13 @@
 
 	<!-- 中间图 -->
 	<div id="entrance" >
-		<a href="{:url('/gj/index')}">
+		<div id="entrance_div" >
 		<div id="entrance_left" >
-
+			<a href="{:url('/gj/index')}">
+			<img style="width:540px;height:90px;margin-top:36px;" src='__STATIC__/qian/images/header.png'>
+			</a>
 		</div>
-		</a>
+		
 		<div id="entrance_right" >
 			<div class="new_search" >
 				<div id="complex_search" >
@@ -61,13 +63,14 @@
 				</div>
 			</div>
 		<ul class="top_list" >
-			<li><span class="cate_id" style="cursor:pointer;margin-left:0px;" href="{:url('/gj/index/sidepage')}" >&nbsp;</span></li>
+			<li><span class="cate_id" style="cursor:pointer;margin-left:0px;" href="{:url('/gj/index/sidepage')}" >全部</span></li>
 			{volist name="$data['top_list']" id="vo"}
 				<li>
 					<li><span class="cate_id" style="cursor:pointer" href="{:url('/gj/index/sidepage')}" value="{$vo['id']}" is_top="">{$vo['title']}</span></li>
 				</li>
 			{/volist}
 		</ul>
+		</div>
 		</div>
 	</div>
 	<div id="resources" >
@@ -81,12 +84,17 @@
 			<li><img src="__STATIC__/qian/images/112244.jpg" style="width: 100%; height: 100%;" ></li>
 		</ul>
 	</div>
+	<hr style="width: 100%; min-width: 1200px; margin: 0 auto;">
 	<div id="relation" >
 		<ul>
 			<li><img src="__STATIC__/qian/images/112266.jpg" style="width: 100%; height: 100%;" ></li>
+			<li style="margin-left:16px;">
+				<img src="__STATIC__/qian/images/112266.jpg" style="width: 100%; height: 100%;" >
+			</li>
 			<li><img src="__STATIC__/qian/images/112266.jpg" style="width: 100%; height: 100%;" ></li>
-			<li><img src="__STATIC__/qian/images/112266.jpg" style="width: 100%; height: 100%;" ></li>
-			<li><img src="__STATIC__/qian/images/112266.jpg" style="width: 100%; height: 100%;" ></li>
+			<li style="margin-left:16px;">
+				<img src="__STATIC__/qian/images/112266.jpg" style="width: 100%; height: 100%;" >
+			</li>
 		</ul>
 	</div>
 

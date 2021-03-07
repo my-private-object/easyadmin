@@ -15,25 +15,32 @@
 	{include file="common/header" /}
 
 	<div id="entrance" >
-		<a href="{:url('/gj/index')}">
+		<div id="entrance_div" >
 		<div id="entrance_left" >
-			<!-- <img src="__STATIC__/qian/images/footer.jpg"> -->
-			<!-- <span id="web_name" >中国近代文献资源全库</span>
-			<span id="logo">LOGO</span> -->
+			<a href="{:url('/gj/index')}">
+			<img style="width:540px;height:90px;margin-top:36px;" src='__STATIC__/qian/images/header.png'>
+			</a>
 		</div>
-		</a>
 		<ul id="entrance_right" >
-			<li><span class="cate_id" style="cursor:pointer;margin-left:180px;" href="{:url('/gj/index/sidepage')}" >&nbsp;</span></li>
+			
+			{if condition="$data['topData']['top_cate'] eq '' "}
+			<li><span class="cate_id" style="cursor:pointer;margin-left:180px;color:red;" href="{:url('/gj/index/sidepage')}" >全部</span></li>
+			{else/}
+			<li><span class="cate_id" style="cursor:pointer;margin-left:180px;" href="{:url('/gj/index/sidepage')}" >全部</span></li>
+			{/if}
+
 			{volist name="$data['topData']['top_list']" id="vo"}
 			{if condition="$vo['id'] eq $data['topData']['top_cate'] "}					
-			<li><span class="cate_id" style="cursor:pointer" href="{:url('/gj/index/sidepage')}" value="{$vo['id']}" is_top="1">{$vo['title']}</span></li>
+			<li><span class="cate_id" style="cursor:pointer;color:red;" href="{:url('/gj/index/sidepage')}" value="{$vo['id']}" is_top="1">{$vo['title']}</span></li>
 			{else/}
 			<li><span class="cate_id" style="cursor:pointer" href="{:url('/gj/index/sidepage')}" value="{$vo['id']}" is_top="">{$vo['title']}</span></li>
 			{/if}
 			{/volist}
 		</ul>
+		</div>
 	</div>
 	<div id="all_search" >
+		<div id="all_search_div">
 		<!-- <div id="book_category" >
 			<ul>
 				<li>报纸</li>
@@ -70,6 +77,7 @@
 				<li><a href="#">文学</a></li>
 				<li><a href="#">宗教</a></li>
 			</ul>
+		</div>
 		</div>
 	</div>
 	<div id="resources" >
@@ -175,33 +183,32 @@
 					<li style="margin-top: 15px; margin-left: 15px; ">
 					{/eq}
 						<div class="content_image">
-							<a href="#" target="_blank" ><img src="{$vo.logo}" /></a>
+							<a href="{:url('/gj/index/details',['book'=>$vo.id] )}" target="_blank"><img src="{$vo.logo}" /></a>
 						</div>
 						<div class="content_info">
 							<div class="info_frame" style="margin-top: 20px; " >
-								<span>书&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</span>
-								<a href="#">
-									<span class="info_list" style="color:black;">{$vo.title}
-									</span>
+								<span class="info_list" style="color:#446D6D;width:57px;">书&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</span>
+								<a href="{:url('/gj/index/details',['book'=>$vo.id] )}" target="_blank">
+									<span class="info_list" style="color:black;">{$vo.title}</span>
 								</a>
 							</div>
 							<div class="info_frame" >
-								<span>著&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;者:</span>
-								<a href="#"><span class="info_list" style="color:black;">{$vo.author}</span></a>
+								<span class="info_list" style="color:#446D6D;width:57px;">著&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;者:</span>
+								<span class="info_list" style="color:black;">{$vo.author}</span>
 							</div>
 							<div class="info_frame" >
-								<span>出版机构:</span>
-								<a href="#"><span class="info_list" >{$vo.company}</span></a>
+								<span class="info_list" style="color:#446D6D;width:57px;">出版机构:</span>
+								<span class="info_list" >{$vo.company}</span>
 							</div>
 							<div class="info_frame" >
-								<span>出版时间:</span>
-								<a href="#"><span class="info_list" >1957-10-16{$vo.book_time}</span></a>
+								<span class="info_list" style="color:#446D6D;width:57px;">出版时间:</span>
+								<span class="info_list" >1957-10-16{$vo.book_time}</span>
 							</div>
 						</div>
 						<div class="content_href">
-							<a href="#" style="margin-left: 2px;" >阅读</a>
+							<a href="{:url('/gj/index/details',['book'=>$vo.id] )}" target="_blank" style="margin-left: 2px;" >阅读</a>
 							<a href="#" style="margin-left: 60px;">收藏</a>
-							<a href="#" style="margin-left: 160px;">详情</a>
+							<a href="{:url('/gj/index/details',['book'=>$vo.id] )}" target="_blank" style="margin-left: 160px;">详情</a>
 						</div>
 					</li>
 					{/volist}
@@ -261,6 +268,7 @@
 				<span id="hidden_1" value="{$data['rightData']['field']['field']['con']}"  hidden></span>
 				<span id="hidden_2" value="{$data['rightData']['field']['field']['type']}"  hidden></span>
 				<span id="hidden_3" value="{$data['rightData']['field']['field']['name']}"  hidden></span>
+				<span id="hidden_5" value="{$data['rightData']['field']['field']['cate_id']}"  hidden></span>
 				{/notempty}
 				{notempty name="$data_json"}
 				<span id="hidden_4" href="{:url('/gj/index/highSearchPage')}" value="{$data_json}" hidden ></span>
@@ -354,6 +362,18 @@ $("span").on("click",function(){
 	    });
  		// alert(checkbox);
  		var searchValue = $("#search_key").val();
+
+ 		// 循环赋值第一分类
+ 		$(".cate_id").each(function(ii,vv){
+		    //ii 指第几个元素的序列号。
+		    //vv 指遍历得到的元素。
+		    if ($(vv).attr('is_top') == 1) {
+		    	// console.log($(vv).html());
+		    	// console.log($(vv).attr('value'));
+		    	cate_id = $(vv).attr('value')
+		    }
+		});
+
  		submitForm(href, cate_id, cate_bid, cate_wbid, page='', searchValue, checkbox);
 
  	}
@@ -425,17 +445,19 @@ function page(e) {
  		var con = $("#hidden_1").attr('value');
  		var type = $("#hidden_2").attr('value');
  		var name = $("#hidden_3").attr('value');
+ 		var cate_id = $("#hidden_5").attr('value');
  		console.log(con);
  		console.log(type);
  		console.log(name);
  		var search_page = {
  			"con": con,
  			"type": type,
- 			"name": name
+ 			"name": name,
+ 			"cate_id": cate_id
  		}
  		console.log(search_page);
  		// 获取上部分类ID
- 		var cate_id = getTopMenuCate();
+ 		// var cate_id = getTopMenuCate();
  		// 获取左侧分类ID
  		var left_cate = getLeftMenuCate();
 
@@ -467,6 +489,7 @@ function submitForm(href, cate_id, cate_bid='', cate_wbid='', page='', searchVal
 	    $("body").find("form").append("<input type='text' name='" + 'search_field[con]' + "' value = '" + search_page['con'] + "'></input>");
 	    $("body").find("form").append("<input type='text' name='" + 'search_field[type]' + "' value = '" + search_page['type'] + "'></input>");
 	    $("body").find("form").append("<input type='text' name='" + 'search_field[name]' + "' value = '" + search_page['name'] + "'></input>");
+	    $("body").find("form").append("<input type='text' name='" + 'search_field[cate_id]' + "' value = '" + search_page['cate_id'] + "'></input>");
     }
 
     $("body").find("form").submit();

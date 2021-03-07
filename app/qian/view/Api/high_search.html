@@ -14,13 +14,12 @@
 	{include file="common/header" /}
 	
 	<div id="entrance" >
-		<a href="{:url('/gj/index')}">
+		<div id="entrance_div" >
 		<div id="entrance_left" >
-			<!-- <img src="__STATIC__/qian/images/footer.jpg"> -->
-			<!-- <span id="web_name" >中国近代文献资源全库</span>
-			<span id="logo">LOGO</span> -->
+			<a href="{:url('/gj/index')}">
+			<img style="width:540px;height:90px;margin-top:36px;" src='__STATIC__/qian/images/header.png'>
+			</a>
 		</div>
-		</a>
 		<div id="entrance_right" >
 			<div class="new_search" >
 				<div id="complex_search" >
@@ -51,7 +50,7 @@
 				</div>
 			</div>
 		<ul class="top_list" >
-			<li><span class="cate_id" style="cursor:pointer;margin-left:0px;" href="{:url('/gj/index/sidepage')}" >&nbsp;</span></li>
+			<li><span class="cate_id" style="cursor:pointer;margin-left:0px;" href="{:url('/gj/index/sidepage')}" >全部</span></li>
 			{volist name="$data['topData']['top_list']" id="vo"}
 			{if condition="$vo['id'] eq $data['topData']['top_cate'] "}					
 			<li><span class="cate_id" style="cursor:pointer" href="{:url('/gj/index/sidepage')}" value="{$vo['id']}" is_top="1">{$vo['title']}</span></li>
@@ -60,6 +59,7 @@
 			{/if}
 			{/volist}
 		</ul>
+		</div>
 		</div>
 	</div>
 

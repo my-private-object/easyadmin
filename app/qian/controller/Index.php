@@ -38,7 +38,7 @@ class Index {
 
         $side = new SidePage();
         $result = $side->list();
-
+        // dump($result);
         view::assign( 'data', $result );
         return view::fetch('qian@Api/side');
 
@@ -94,7 +94,7 @@ class Index {
         // 整合列表数据
         $side = new SidePage();
         $result = $side->list($result);
-        dump($result);
+        // dump($result);
         // exit;
         view::assign( 'data', $result );
         return view::fetch('qian@Api/Search');
@@ -139,7 +139,7 @@ class Index {
     public function fileRead() {
         $exportFile = new OperationFile();
         $result = $exportFile->searchFile();
-        dump($result);
+        // dump($result);
     }
 
     // 文件导入

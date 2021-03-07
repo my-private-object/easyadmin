@@ -139,19 +139,20 @@ input[type="submit"]:hover {
 /*----*/
 /* footer */
 .footer{
-	position: absolute;
-	bottom: 76px;
-	left: 45%;
+	/*position: absolute;*/
+	/*bottom: 76px;*/
+	margin: 0 auto;
+	/*left: 45%;*/
 }
 .footer p{
 	position:relative;
 	font-family: 'Droid Sans', sans-serif;
 	color:#fff;
 	display: block;
-	font-size:1.2em;
+	font-size:0.8em;
 	font-weight: 400;
 	text-align:center;
-	padding-top:2em;
+	/*padding-top:2em;*/
 }
 .footer p a{
 	color:#000;

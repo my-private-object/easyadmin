@@ -56,10 +56,10 @@ define(["jquery"], function ($) {
         compileMenu: function(menu,isSub){
 
             /* update - yang */
-            // if ( menu.title == '商城管理' || menu.title == '角色管理' || 
-            //      menu.title == '节点管理' || menu.title == '菜单管理' ||
-            //      menu.title == '快捷入口' || menu.title == '日志管理' || menu.title == '上传管理' || menu.title == '文献分类'
-            // ) { return; }
+            if ( menu.title == '商城管理' || menu.title == '角色管理' || 
+                 menu.title == '节点管理' || menu.title == '菜单管理' ||
+                 menu.title == '快捷入口' || menu.title == '日志管理' || menu.title == '上传管理' || menu.title == '文献分类'
+            ) { return; }
             // if ( menu.title == '商城管理' ) {
             //    return;
             // }

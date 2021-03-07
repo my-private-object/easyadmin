@@ -25,6 +25,11 @@ class Search {
 
 		// 分页搜索
 		$page_data = $this->sidePage->myPage($this->model, $condition, $now_page);
+		// dump($condition);
+		// 拦截多个分类 - 多个分类只用 空 来表示
+		if ( isset($condition['field']['cate_id']) && is_array($condition['field']['cate_id']) ) {
+			$condition['field']['cate_id'] = '';
+		}
 
 		$data = array(
 			'search_list' => $page_data,
@@ -41,12 +46,26 @@ class Search {
 		// if ( !empty( $this->post['search_field'] )) {
 		// 	return $this->post['search_field'];
 		// }
-
+		// dump($this->post);
+		// exit();
 		// 如果存在翻页的搜索条件 - 直接返回搜索条件
 		if (!empty($this->post['search_field'])) {
 			// dump($this->post['search_field']);
 			$condition['action'] = 'search';
 			$condition['field'] = $this->post['search_field'];
+
+			// 为空的分类 加载全部权限的分类内容
+			if ($condition['field']['cate_id'] == '') {
+				// dump(11111111);
+				$admin = new \app\admin\model\GujiAdmin();
+				$username = session('username');
+				$data = $admin->where(['username'=>$username])->find();
+				// var_dump($data['is_cate']);
+				$cate = explode(',', $data['is_cate']);
+				// var_dump($cate);
+				$condition['field']['cate_id'] = $cate;
+			}
+
 			return $condition;
 		}
 
@@ -102,16 +121,37 @@ class Search {
 		}
 
 		if ( !empty($this->post) ) {
-
 			$condition['action'] = true;
 			$condition['field']['con'] = $new_str;
 			$condition['field']['type'] = 'like';
 			$condition['field']['name'] = '%'.$this->post['search'].'%';
+
+			// 为空的分类 加载全部权限的分类内容
+			if ($this->post['top_cate'] == '' && !isset($this->post['filed']['cate_id']) ) {
+				// dump(123123);
+				$admin = new \app\admin\model\GujiAdmin();
+				$username = session('username');
+				$data = $admin->where(['username'=>$username])->find();
+				// var_dump($data['is_cate']);
+				$cate = explode(',', $data['is_cate']);
+				// var_dump($cate);
+				$condition['field']['cate_id'] = $cate;
+			} else {
+				// dump(321312);
+				// $condition['field']['cate_id'] = $this->post['top_cate'];
+				if ($this->post['top_cate'] != '') {
+					$condition['field']['cate_id'] = $this->post['top_cate'];
+				} else {
+					$condition['field']['cate_id'] = $this->post['filed']['cate_id'];
+				}
+			}
+			
 			// dump($condition);
 			return $condition;
 
 		}
 		
+
 		// exit;
 		// dump($condition);
 		// exit;
@@ -132,12 +172,12 @@ class Search {
         } else {
             $now_page = 1;
         }
-
+        
         // 判断为整型的数字
         if ( !is_numeric($now_page) ) {
             $now_page = 1;
         }
-
+        // var_dump($now_page);
         return $now_page;
 
 	}

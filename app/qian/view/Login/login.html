@@ -37,26 +37,22 @@ $(document).ready(function(c) {
 <div class="inset">
 	<div class="login-head">
 		<h1 style="margin-left: 90px;">中国近代文献资源全库</h1>
-		<!-- <div class="alert-close"> </div> 			 -->
 	</div>
-	<!-- <div style="float:left; margin-top: 30px; margin-left: 35px; font-size: 12px; color: gray;" >
-		用户登陆
-	</div> -->
 		<form action="{:url('login.Login/userVerify')}" method="post" >
 			<li>
-				<input name="username" type="text" class="text" value="账号" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '账号';}"><a href="#" class=" icon user"></a>
+				<input name="username" type="text" onkeydown="if(event.keyCode==13) return false;" id="user" class="text" value="账号" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '账号';}"><a href="#" id="user_icon" class=" icon user"></a>
+				<!-- <input type="text" style='display:none' /> -->
 			</li>
 				<div class="clear"> </div>
 			<li>
-				<input name="password" type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"> <a href="#" class="icon lock"></a>
+				<input name="password" type="password" id="pass" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"> <a href="#" id="pass_icon" class="icon lock"></a>
 			</li>
 			<div class="clear"> </div>
 			<div class="submit">
 				<input type="submit" value="登 陆" >
-				<!-- <h4 style="float:right; margin-right: 20px;"><a href="#">试用申请</a></h4> -->
 						  <div class="clear">  </div>
 			</div>
-				
+
 		</form>
 		</div>					
 	</div>
@@ -64,8 +60,35 @@ $(document).ready(function(c) {
 	<div class="clear"> </div>
 <!--- footer --->
 <div class="footer">
-	<p>ICP:XXXXXXXXXX | 联系方式:12345678@qq.com</p>
+	<p style="margin-top:80px;"><a style="color:white" href="http://beian.miit.gov.cn/">ICP备案号：京ICP备20015677号-1</a></p>
+	<p>联系我们：112276772@qq.com</p>
 </div>
 
 </body>
 </html>
+
+<script type="text/javascript">
+	$(function () {
+
+		var $inp = $('#user');
+        $inp.bind('keydown', function (e) {
+        	var key = e.which;
+        	console.log(key);
+        	if ( key == 13 ) {
+        		$("#pass").focus();
+        	}
+        	if ( key == 9 ) {
+        		$("#user_icon").focus();
+        	}
+        });
+
+        var $tab = $('#pass');
+        $tab.bind('keydown', function (e) {
+        	var tab_key = e.which
+        	if ( tab_key == 9 ) {
+        		$("#pass_icon").focus();	
+        	}
+    	});
+
+    });
+</script>

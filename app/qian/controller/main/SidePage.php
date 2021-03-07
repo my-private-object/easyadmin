@@ -39,10 +39,11 @@ class SidePage {
 
         $post = $_POST;
 
-        if ( !empty($post['top_cate']) ) {
+        // 判断是否有分类
+        if ( !empty($post['top_cate']) && $post['top_cate'] != '') {
             $top_cate = $post['top_cate'];
         } else {
-            $top_cate = '11';
+            $top_cate = '';
         }
 
         $data = array(
@@ -124,8 +125,7 @@ class SidePage {
         $page_data = $this->myPage($books, $condition, $now_page);
 
         // var_dump($page_data['page']);
-
-        var_dump($condition);
+        // var_dump($condition);
         // var_dump($left_cate);
         $rightData = array(
             'list'=>$page_data['list'], 
@@ -157,20 +157,24 @@ class SidePage {
 
 
         if ( !empty($condition['action']) and $condition['action'] == 'search' ) {
-
-            // 查询搜索页数据总数
-            $count = $model->where($condition['field']['con'], $condition['field']['type'], $condition['field']['name'])->count();
+            
+            // 查询搜索页数据总数 - 分页总数
+            $count = $model
+                ->where($condition['field']['con'], $condition['field']['type'], $condition['field']['name'])
+                ->where('cate_id', 'in', $condition['field']['cate_id'])
+                ->count();
 
         } else if ( !empty($condition['action']) and $condition['action'] == 'high_search' ) {
             
+            // 查询高级搜索 - 分页总数
             $count = $model->whereOr( $condition['high_search'] )->count();
             // $count = $model->query($condition['sql_count']);
             // $count = $count[0]['count'];
-            dump($count);
+            // dump($count);
             // exit;
         } else {
 
-            // 查询分页数据
+            // 查询分页总数
             $count = $model->where($condition)->count();
 
         }
@@ -191,12 +195,16 @@ class SidePage {
 
         // var_dump($search_num);
         if ( !empty($condition['action']) and $condition['action'] == 'search' ) {
-
             // 查询搜索分页数据
-            $list = $model->where($condition['field']['con'], $condition['field']['type'], $condition['field']['name'])->limit($search_num, 8)->select();
+            
+            $list = $model
+                ->where($condition['field']['con'], $condition['field']['type'], $condition['field']['name'])
+                ->where('cate_id', 'in', $condition['field']['cate_id'])
+                ->limit($search_num, 8)->select();
 
         } else if ( !empty($condition['action']) and $condition['action'] == 'high_search' ) {
             
+            // 查询高级搜索分页数据
             $list = $model->whereOr( $condition['high_search'] )->limit($search_num, 8)->select();
 
         } else {

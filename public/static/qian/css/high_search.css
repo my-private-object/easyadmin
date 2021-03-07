@@ -2,9 +2,11 @@ body {
 	margin: 0px;
 	padding: 0px;
 	width: 100%;
-	min-width: 1200px;
-	min-height:600px;
+	min-width: 1024px;
+	min-height:768px;
 	overflow-x: hidden;
+	transform: scale(1);
+	zoom:1;
 	/*height: 100%;*/
 	background: url('../images/back_2.png');
 }
@@ -27,34 +29,49 @@ a {
 	/*background:rgba(182,168,131,0.6);*/
 }
 
-#header_left {
-	width: 600px;
+#header_div {
+	margin: 0 auto;
+	width:1060px;
 	height: 50px;
-	/*background: yellow;*/
+}
+
+#header_left {
+	width: 500px;
+	height: 50px;
 	float: left;
 }
 
 #header_right {
-	width: 600px;
+	padding: 0px;
+	margin: 0px;
+	width: 260px;
+	min-width: 310px;
 	height: 50px;
-	/*background: yellow;*/
+	float:right;
+	list-style-type: none;
+}
+
+#header_right li {
+	line-height: 50px;
 	float:right;
 }
 
 #scrollbar {
-	margin-left: 100px;
 	line-height: 50px;
-	/*background: red;*/
 }
 
 #ontrial {
-	margin-left: 300px;
-	line-height: 50px;
+	min-width: 100px;
 }
 
 #register {
-	margin-left: 60px;
-	line-height: 50px;
+	min-width: 30px;
+	/*line-height: 50px;*/
+}
+
+.m_login {
+	min-width: 30px;
+	margin-right:14px;
 }
 
 /* entrance */
@@ -64,16 +81,22 @@ a {
 	height: 150px;
 	border-top: 1px solid gray;
 	/*background-color: rgba(182,168,131);*/
-	background: url('../images/header.jpg');
+	background: url('../images/header_back.png');
 	/*background:rgba(182,168,131,0.6);*/
 	/*background: url('../images/logo_3.jpg');*/
 	background-size: 100% 100%;
 }
 
-#entrance_left {
-	width: 600px;
+#entrance_div {
+	width: 1060px;
+	min-width: 1060px;
 	height: 150px;
-	/*background: yellow;*/
+	margin: 0 auto;
+}
+
+#entrance_left {
+	width: 500px;
+	height: 150px;
 	float: left;
 }
 
@@ -91,7 +114,7 @@ a {
 #entrance_right {
 	margin: 0px;
 	padding: 0px;
-	width: 600px;
+	width: 550px;
 	float: left;
 }
 
