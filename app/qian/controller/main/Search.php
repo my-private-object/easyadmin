@@ -92,15 +92,18 @@ class Search {
 					// $condition['field']['title'] = $condition['title'];
 				}
 				if ( $value == 2 ) {
+					$str .= '|book_time';
+				}
+				if ( $value == 3 ) {
 					$str .= '|author';
 					// $condition['field']['author'] = $condition['title'];
 				}
-				if ( $value == 3 ) {
-					$str .= '|a_title';
+				if ( $value == 4 ) {
+					$str .= '|chief_editor';
 					// $condition['field']['a_title'] = $condition['title'];
 				}
-				if ( $value == 4 ) {
-					$str .= '|book_time';
+				if ( $value == 5 ) {
+					$str .= '|publi_sher_urb';
 					// $condition['field']['book_time'] = $condition['title'];
 				}
 
@@ -117,7 +120,7 @@ class Search {
 			// $condition['field']['author'] = ['like', "%".$this->post['search'].'%'];
 			
 		} else {
-			$new_str = 'title|author|a_title|book_time';
+			$new_str = 'title|book_time|author|chief_editor|publi_sher_urb';
 		}
 
 		if ( !empty($this->post) ) {

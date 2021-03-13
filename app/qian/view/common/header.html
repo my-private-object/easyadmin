@@ -4,12 +4,13 @@
 <div id="header" >
 	<div id="header_div">
 	<div id="header_left">
-		<marquee id="scrollbar" direction="right" >欢迎使用中国近代文献资源全库</marquee>
+		<marquee id="scrollbar" direction="right">欢迎使用中国近代文献资源全库</marquee>
 	</div>
 	<ul id="header_right" >
-		<li class="m_login" style="cursor:pointer;">|登陆</li>
-		<li id="register">注册</li>
-		<li id="ontrial">收藏本页</li>
+		<!-- <li class="m_login" style="cursor:pointer;">|登陆</li>
+		<li id="register">注册</li> -->
+		<li id="register" style="cursor:pointer;">帮助&nbsp;&nbsp;&nbsp;&nbsp;</li>
+		<li id="ontrial" style="cursor:pointer;" onclick="bookmarked();" >收藏本页</li>
 	</ul>
 	</div>
 </div> 
@@ -96,6 +97,20 @@ $(document).ready(function(){
 	    // return rootPath; 
 	    return local;
 	}
+
+	// 收藏本页
+	function bookmarked() {
+		var ctrl = (navigator.userAgent.toLowerCase()).indexOf('mac') != -1 ? 'Command/Cmd': 'CTRL';
+        if (document.all) {
+            window.external.addFavorite('http://122.49.30.37:81/gj', '收藏本页')
+        } else if (window.sidebar) {
+            window.sidebar.addPanel('收藏本页', 'http://122.49.30.37:81/gj', "")
+        } else {
+            alert('您可以尝试通过快捷键' + ctrl + ' + D 加入到收藏夹~')
+        }
+	}
+
+
 
 
 </script>

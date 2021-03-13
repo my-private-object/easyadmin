@@ -45,11 +45,12 @@
 				</div>
 				<div id="all_field" >
 					<ul id="checkbox-d">
-						<li style="margin-top:3px;" >全部字段:</a></li>
-						<li style="margin-left:1px;" ><input name="Fruit" type="checkbox" value="1" />标题 </li>
-						<li><input name="Fruit" type="checkbox" value="2" />作者 </li>
-						<li><input name="Fruit" type="checkbox" value="3" />副标题 </li>
-						<li><input name="Fruit" type="checkbox" value="4" />日期 </li>			
+						<li style="margin-top:3px;" >字段:</li>
+						<li style="margin-left:1px;" ><input name="Fruit" type="checkbox" value="1" />题名 </li>
+						<li><input name="Fruit" type="checkbox" value="2" />时间 </li>
+						<li><input name="Fruit" type="checkbox" value="3" />著者 </li>
+						<li><input name="Fruit" type="checkbox" value="4" />出版机构 </li>
+						<li><input name="Fruit" type="checkbox" value="5" />出版地 </li>
 					</ul>
 				</div>
 				<div id="hot_search" >
@@ -63,7 +64,7 @@
 				</div>
 			</div>
 		<ul class="top_list" >
-			<li><span class="cate_id" style="cursor:pointer;margin-left:0px;" href="{:url('/gj/index/sidepage')}" >全部</span></li>
+			<li><span class="cate_id" style="cursor:pointer;margin-left:0px;" href="{:url('/gj/index/index')}" >首页</span></li>
 			{volist name="$data['top_list']" id="vo"}
 				<li>
 					<li><span class="cate_id" style="cursor:pointer" href="{:url('/gj/index/sidepage')}" value="{$vo['id']}" is_top="">{$vo['title']}</span></li>

@@ -24,9 +24,9 @@
 		<ul id="entrance_right" >
 			
 			{if condition="$data['topData']['top_cate'] eq '' "}
-			<li><span class="cate_id" style="cursor:pointer;margin-left:180px;color:red;" href="{:url('/gj/index/sidepage')}" >全部</span></li>
+			<li><span class="cate_id" style="cursor:pointer;margin-left:248px;color:red;" href="{:url('/gj/index/index')}" >首页</span></li>
 			{else/}
-			<li><span class="cate_id" style="cursor:pointer;margin-left:180px;" href="{:url('/gj/index/sidepage')}" >全部</span></li>
+			<li><span class="cate_id" style="cursor:pointer;margin-left:248px;" href="{:url('/gj/index/index')}" >首页</span></li>
 			{/if}
 
 			{volist name="$data['topData']['top_list']" id="vo"}
@@ -61,11 +61,12 @@
 		<div id="all_field" >
 			<!-- <form action="" method="get">  -->
 			<ul id="checkbox-d">
-				<li>全部字段</a></li>
-				<li><input name="Fruit" type="checkbox" value="1" />标题 </li>
-				<li><input name="Fruit" type="checkbox" value="2" />作者 </li>
-				<li><input name="Fruit" type="checkbox" value="3" />副标题 </li>
-				<li><input name="Fruit" type="checkbox" value="4" />日期 </li>			
+				<li>全部字段</li>		
+				<li><input name="Fruit" type="checkbox" value="1" />题名 </li>
+				<li><input name="Fruit" type="checkbox" value="2" />时间 </li>
+				<li><input name="Fruit" type="checkbox" value="3" />著者 </li>
+				<li><input name="Fruit" type="checkbox" value="4" />出版机构 </li>
+				<li><input name="Fruit" type="checkbox" value="5" />出版地 </li>
 			</ul>
 			<!-- </form>  -->
 		</div>
