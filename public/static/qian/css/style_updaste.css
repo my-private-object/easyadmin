@@ -13,6 +13,19 @@ a {
 	text-decoration:none;
 }
 
+#marquee {
+	background: url('../images/back_2.png');
+	overflow:hidden;
+}
+
+#marquee img {
+	width:100px; 
+	height:120px;
+	border: 1px solid gray;
+}
+
+
+
 /* header */
 #header {
 	width: 100%;

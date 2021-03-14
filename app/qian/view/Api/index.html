@@ -8,17 +8,43 @@
 	<link rel="stylesheet" type="text/css" href="__STATIC__/qian/css/style_updaste.css" />
 	<link rel="stylesheet" type="text/css" href="__STATIC__/qian/css/last.css" />
 	<script type="text/javascript" src="__STATIC__/qian/js/jquery.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="__STATIC__/qian/js/jquery-1.11.1.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="__STATIC__/qian/js/unslider.min.js" charset="utf-8"></script>
 	<style>
-		marquee {
-			background: url('../images/back_2.png');
+
+		/*图片轮播*/
+		.banner { position: relative; overflow: auto; text-align: center;}
+		.banner li { list-style: none; }
+		.banner ul li { float: left; }
+
+		#b06 { width: 512px;}
+		#b06 .dots { position: absolute; left: 0; right: 0; bottom: 20px;}
+		#b06 .dots li 
+		{ 
+			display: inline-block; 
+			width: 5px; 
+			height: 6px; 
+			margin: 0 4px; 
+			text-indent: -999em; 
+			border: 2px solid #fff; 
+			border-radius: 6px; 
+			cursor: pointer; 
+			opacity: .4; 
+			-webkit-transition: background .5s, opacity .5s; 
+			-moz-transition: background .5s, opacity .5s; 
+			transition: background .5s, opacity .5s;
 		}
-		marquee img {
-			width:100px; 
-			height:120;
-			margin:0 5px;
-			border: 1px solid gray;
+		#b06 .dots li.active 
+		{
+			background: #fff;
+			opacity: 1;
 		}
+		#b06 .arrow {position: absolute; top: 160px;}
+		#b06 #al { left: 0px;}
+		#b06 #ar { right: 0px;}
+
 	</style>
+
 </head>
 <body>
 	<!-- 头部 -->
@@ -76,7 +102,20 @@
 	</div>
 	<div id="resources" >
 		<div id="resources_left" >
-			<img src="__STATIC__/qian/images/112233.jpg" style="width: 100%; height: 100%;" >
+<!-- 			<h2>示例 6</h2>
+			<span>调整为响应式</span> -->
+			<div class="banner" id="b06">
+			    <ul style="padding: 0px; margin: 0px;">
+			        <li><img class="sliderimg" src="__STATIC__/qian/images/index/sliderimg/01.jpg" alt="unslider.js 使用演示" width="100%" ></li>
+			        <li><img class="sliderimg" src="__STATIC__/qian/images/index/sliderimg/02.jpg" alt="unslider.js 使用演示" width="100%" ></li>
+			        <li><img class="sliderimg" src="__STATIC__/qian/images/index/sliderimg/03.jpg" alt="unslider.js 使用演示" width="100%" ></li>
+			        <!-- <li><img class="sliderimg" src="__STATIC__/qian/images/index/sliderimg/04.jpg" alt="unslider.js 使用演示" width="100%" ></li>
+			        <li><img class="sliderimg" src="__STATIC__/qian/images/index/sliderimg/05.jpg" alt="unslider.js 使用演示" width="100%" ></li> -->
+			    </ul>
+			    <a href="javascript:void(0);" class="unslider-arrow06 prev"><img class="arrow" id="al" src="__STATIC__/qian/images/index/sliderimg/arrowl.png" alt="prev" width="20" height="35"></a>
+			    <a href="javascript:void(0);" class="unslider-arrow06 next"><img class="arrow" id="ar" src="__STATIC__/qian/images/index/sliderimg/arrowr.png" alt="next" width="20" height="37"></a>
+			</div>
+			<!-- <img src="__STATIC__/qian/images/112233.jpg" style="width: 100%; height: 100%;" > -->
 		</div>
 		<ul id="resources_right" >
 			<li><img src="__STATIC__/qian/images/112244.jpg" style="width: 100%; height: 100%;" ></li>
@@ -99,32 +138,82 @@
 		</ul>
 	</div>
 
-	<MARQUEE style="border: 1px solid #cccccc; padding: 10" behavior="alternate" direction=right loop=3 scrollamount=1 scrolldelay=10 align=top bgcolor=#ffffff hspace=20 vspace=10 οnmοuseοver=this.stop() οnmοuseοut=this.start()>
-		<a href="#"><img src="__STATIC__/qian/images/index/QK012.jpg" border=0 "></a>
-		<a href="#"><img src="__STATIC__/qian/images/index/QK031.jpg" border=0 "></a>
-		<a href="#"><img src="__STATIC__/qian/images/index/QK061.jpg" border=0 "></a>
-		<a href="#"><img src="__STATIC__/qian/images/index/QK095.jpg" border=0 "></a>
-		<a href="#"><img src="__STATIC__/qian/images/index/QK096.jpg" border=0 "></a>
-		<a href="#"><img src="__STATIC__/qian/images/index/QK097.jpg" border=0 "></a>
-		<a href="#"><img src="__STATIC__/qian/images/index/QK098.jpg" border=0 "></a>
-		<a href="#"><img src="__STATIC__/qian/images/index/QK099.jpg" border=0 "></a>
-		<a href="#"><img src="__STATIC__/qian/images/index/QK103.jpg" border=0 "></a>
-		<a href="#"><img src="__STATIC__/qian/images/index/QK104.jpg" border=0 "></a>
-		<a href="#"><img src="__STATIC__/qian/images/index/QK105.jpg" border=0 "></a>
-		<a href="#"><img src="__STATIC__/qian/images/index/QK106.jpg" border=0 "></a>
-		<a href="#"><img src="__STATIC__/qian/images/index/QK107.jpg" border=0 "></a>
-		<a href="#"><img src="__STATIC__/qian/images/index/QK108.jpg" border=0 "></a>
-		<a href="#"><img src="__STATIC__/qian/images/index/QK109.jpg" border=0 "></a>
-		<a href="#"><img src="__STATIC__/qian/images/index/QK110.jpg" border=0 "></a>
-	</MARQUEE>
-
-
+	<marquee onmouseover="this.stop()" onmouseout="this.start()" id="marquee" behavior="alternate" direction=right loop=3 scrollamount=1 scrolldelay=10 align=top bgcolor=#ffffff hspace=20 vspace=10" >
+		<a href="#"><img onmouseover="act(this)" onmouseout="not_act(this)" src="__STATIC__/qian/images/index/QK012.jpg" border=0 "></a>
+		<a href="#"><img onmouseover="act(this)" onmouseout="not_act(this)" src="__STATIC__/qian/images/index/QK031.jpg" border=0 "></a>
+		<a href="#"><img onmouseover="act(this)" onmouseout="not_act(this)" src="__STATIC__/qian/images/index/QK061.jpg" border=0 "></a>
+		<a href="#"><img onmouseover="act(this)" onmouseout="not_act(this)" src="__STATIC__/qian/images/index/QK095.jpg" border=0 "></a>
+		<a href="#"><img onmouseover="act(this)" onmouseout="not_act(this)" src="__STATIC__/qian/images/index/QK096.jpg" border=0 "></a>
+		<a href="#"><img onmouseover="act(this)" onmouseout="not_act(this)" src="__STATIC__/qian/images/index/QK097.jpg" border=0 "></a>
+		<a href="#"><img onmouseover="act(this)" onmouseout="not_act(this)" src="__STATIC__/qian/images/index/QK098.jpg" border=0 "></a>
+		<a href="#"><img onmouseover="act(this)" onmouseout="not_act(this)" src="__STATIC__/qian/images/index/QK099.jpg" border=0 "></a>
+		<a href="#"><img onmouseover="act(this)" onmouseout="not_act(this)" src="__STATIC__/qian/images/index/QK103.jpg" border=0 "></a>
+		<a href="#"><img onmouseover="act(this)" onmouseout="not_act(this)" src="__STATIC__/qian/images/index/QK104.jpg" border=0 "></a>
+		<a href="#"><img onmouseover="act(this)" onmouseout="not_act(this)" src="__STATIC__/qian/images/index/QK105.jpg" border=0 "></a>
+		<a href="#"><img onmouseover="act(this)" onmouseout="not_act(this)" src="__STATIC__/qian/images/index/QK106.jpg" border=0 "></a>
+		<a href="#"><img onmouseover="act(this)" onmouseout="not_act(this)" src="__STATIC__/qian/images/index/QK107.jpg" border=0 "></a>
+		<a href="#"><img onmouseover="act(this)" onmouseout="not_act(this)" src="__STATIC__/qian/images/index/QK108.jpg" border=0 "></a>
+		<a href="#"><img onmouseover="act(this)" onmouseout="not_act(this)" src="__STATIC__/qian/images/index/QK109.jpg" border=0 "></a>
+		<a href="#"><img onmouseover="act(this)" onmouseout="not_act(this)" src="__STATIC__/qian/images/index/QK110.jpg" border=0 "></a>
+	</marquee>
 
 	{include file="common/last" /}
 
 
 </body>
 </html>
+
+<script type="text/javascript">
+	function act(e) {
+		$(e).css({width:130+'px'})
+		$(e).css({height:150+'px'})
+	}
+	function not_act(e) {
+		$(e).css({width:100+'px'})
+		$(e).css({height:120+'px'})
+	}
+</script>
+
+<script>
+
+$(window).resize(function(){imgReload();});
+
+$(document).ready(function(e) {
+	imgReload();
+    var unslider06 = $('#b06').unslider({
+		dots: true,
+		fluid: true
+	}),
+	data06 = unslider06.data('unslider');
+	
+	$('.unslider-arrow06').click(function() {
+        var fn = this.className.split(' ')[1];
+        data06[fn]();
+    });
+});
+
+function imgReload()
+{
+
+	// var imgHeight = 0;
+	var imgHeight = $("#resources_left").height();
+	var wtmp = $("#resources_left").width();
+
+	$("#b06 ul li").each(function(){
+        $(this).css({width:wtmp + "px"});
+        $(this).css({height:imgHeight + "px"});        
+    });
+
+	$(".sliderimg").each(function(){
+		$(this).css({width:wtmp + "px"});
+		$(this).css({height:imgHeight + "px"});
+		// imgHeight = $(this).height();
+		// imgHeight = $("#this").height();
+	});
+
+}
+
+</script>
 
 
 <script type="text/javascript">
@@ -221,3 +310,5 @@ function submitForm(href, cate_id, cate_bid='', cate_wbid='', page='', searchVal
 
 
 </script>
+
+

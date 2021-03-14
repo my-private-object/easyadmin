@@ -8,14 +8,16 @@
 	border: 1px solid gray;
 	/*background-color: rgba(182,168,131);*/
 	font-size: 14px;
-	float:left;
+	/*float:left;*/
 	background: url('../images/footer.jpg');
 }
 
 #footer_info_1 {
-	width: 220px;
+	width: 320px;
 	height: 25px;
-	margin: 14 auto;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 12px;
 }
 
 /*#footer_info_1 a {
