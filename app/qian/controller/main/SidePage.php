@@ -10,7 +10,8 @@ class SidePage {
     public function list($search_param = '') {
 
         $top_data = $this->topMenu();
-        $left_data = $this->leftMenu();
+        // $left_data = $this->leftMenu();
+        $left_data = $this->newLeftMenu($top_data['top_cate']);
 
         // 判断是否是搜索页传过来的值
         if ( $search_param != '')
@@ -25,7 +26,7 @@ class SidePage {
             'leftData' => $left_data,
             'rightData'  => $right_data
         );
-        // dump($data);
+        dump($data);
         return $data;
 
     }
@@ -55,7 +56,70 @@ class SidePage {
 
     }
 
-    // 左侧列表
+
+
+
+    // 新的左侧列表
+    public function newLeftMenu($top_cate) {
+
+        $post = $_POST;
+
+        // 判断是否有选中二级或三级分类 并返回相应的分类ID
+        if ( !empty($post['left_cate']) ) {
+            $left_cate = array_filter($post['left_cate']);
+            $left_cate = current($left_cate);
+        } else {
+            $left_cate = '';
+        }
+        dump($top_cate);
+
+        // 判断是否有一级分类 - 没有则 暂时 返回 空
+        if ( $top_cate == '' ) {
+            return array(
+                'left_list' => '',
+                'left_cate' => $left_cate
+            );
+        }
+
+        // 获取数据
+        $GujiCateHigh = new \app\admin\model\GujiCateHigh;
+        $list = $GujiCateHigh->field( array('id','pid','title') )->where(['pid'=>$top_cate])->select();
+        $list_array = json_decode($list, true);
+
+        foreach( $list_array as $key=>$value ) {
+            $tmp_result = $GujiCateHigh->field( array('id','pid','title') )->where(['pid'=>$value['id']])->select();
+            $list_array[$key][] = json_decode($tmp_result, true);
+        }
+
+        // 将分类中添加上已经被选择的标签，便于前端展示选中状态
+        if ( $left_cate != '' ) {
+            foreach( $list_array as $key=>$value ) {
+
+                if ( $value['id'] == $left_cate ) {
+                    $list_array[$key]['action'] = 1;
+                    break;
+                }
+
+                foreach($value[0] as $child_value) {
+                    if ( $child_value['id'] == $left_cate ) {
+                        $list_array[$key]['action'] = 1;
+                        break;
+                    }
+                }
+            }
+        }
+
+        dump($list_array);
+        $data = array(
+            'left_list' => $list_array,
+            'left_cate' => $left_cate
+        );
+
+        return $data;
+    }
+
+
+    // 左侧列表 - 旧的 - 现在没在使用
     public function leftMenu() {
 
         $post = $_POST;
@@ -86,6 +150,7 @@ class SidePage {
         return $data;
 
     }
+
 
     // 右侧列表
     public function rightMenu() {
