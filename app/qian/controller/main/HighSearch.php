@@ -63,7 +63,7 @@ class HighSearch {
 
 		$sql_arr = $this->splicCondition($data);
 		$condition['high_search'] = $sql_arr;
-		// dump($sql_arr);
+		dump($sql_arr);
 		// exit;
 		return $condition;
 

@@ -43,11 +43,18 @@ class Search {
 	// 普通搜索条件组合
 	public function lowCondition() {
 
-		// if ( !empty( $this->post['search_field'] )) {
-		// 	return $this->post['search_field'];
-		// }
-		// dump($this->post);
-		// exit();
+		// 获取本ID的分类权限
+		$admin = new \app\admin\model\GujiAdmin();
+		$username = session('username');
+		$data = $admin->where(['username'=>$username])->find();
+		var_dump($data['is_cate']);
+		$cate = explode(',', $data['is_cate']);
+		// var_dump($cate);
+		
+		// 一级分类数组
+		$cate_id_list = $cate;
+
+
 		// 如果存在翻页的搜索条件 - 直接返回搜索条件
 		if (!empty($this->post['search_field'])) {
 			// dump($this->post['search_field']);
@@ -55,93 +62,79 @@ class Search {
 			$condition['field'] = $this->post['search_field'];
 
 			// 为空的分类 加载全部权限的分类内容
-			if ($condition['field']['cate_id'] == '') {
-				// dump(11111111);
-				$admin = new \app\admin\model\GujiAdmin();
-				$username = session('username');
-				$data = $admin->where(['username'=>$username])->find();
-				// var_dump($data['is_cate']);
-				$cate = explode(',', $data['is_cate']);
-				// var_dump($cate);
-				$condition['field']['cate_id'] = $cate;
-			}
+			if ($condition['field']['cate_id'] == '')
+				$condition['field']['cate_id'] = $cate_id_list;
+
+			if ($condition['field']['cate_bid'] == '')
+				$condition['field']['cate_bid'] = '';
+
+			if ($condition['field']['cate_wbid'] == '')
+				$condition['field']['cate_wbid'] = '';
+			
+			$condition['field']['checkbox'] = explode(',', $condition['field']['checkbox']);
 
 			return $condition;
 		}
 
-		// 获取搜索关键字
-		// if (!empty( $this->post['search'] )) {
-		// 	$condition['title'] = $this->post['search'];
-		// } else {
-		// 	$condition['title'] = '档案';
-		// }
-		// dump($condition);
-		// exit;
-		// 判断多选是不是等于空
-		// dump($this->post);
+		// 判断多选框
 		if (!empty( $this->post['checkbox'] )) {
 
 			$checkbox = explode(',', $this->post['checkbox']);
 
 			$str = '';
+			$new_checkbox = array();
 
 			foreach ($checkbox as $value) {
 
 				if ( $value == 1 ) {
 					$str = 'title';
-					// $condition['field']['title'] = $condition['title'];
+					$new_checkbox[] = 1;
 				}
 				if ( $value == 2 ) {
 					$str .= '|book_time';
+					$new_checkbox[] = 2;
 				}
 				if ( $value == 3 ) {
 					$str .= '|author';
-					// $condition['field']['author'] = $condition['title'];
+					$new_checkbox[] = 3;
 				}
 				if ( $value == 4 ) {
 					$str .= '|chief_editor';
-					// $condition['field']['a_title'] = $condition['title'];
+					$new_checkbox[] = 4;
 				}
 				if ( $value == 5 ) {
 					$str .= '|publi_sher_urb';
-					// $condition['field']['book_time'] = $condition['title'];
+					$new_checkbox[] = 5;
 				}
 
 			} 
 
-			// $condition = $str."','like','%".$this->post['search']."%'";
 			$new_str = ltrim($str, '|');
-			// where('name|title','like','thinkphp%')
-			// $condition = "'".$condition;
-			// $condition = "'author|a_title','like','%222%'";
-			// $condition['field']["'".$new_str."'"] = ['like', '%'.$this->post['search'].'%'];
-			// dump($condition);
-			// exit;
-			// $condition['field']['author'] = ['like', "%".$this->post['search'].'%'];
-			
+
 		} else {
 			$new_str = 'title|book_time|author|chief_editor|publi_sher_urb';
+			$new_checkbox = [];
 		}
 
+		// 组组搜索关键字和分类
 		if ( !empty($this->post) ) {
 			$condition['action'] = true;
 			$condition['field']['con'] = $new_str;
 			$condition['field']['type'] = 'like';
-			$condition['field']['name'] = '%'.$this->post['search'].'%';
+			$condition['field']['name'] = '%'.trim($this->post['search']).'%';
+			$condition['field']['checkbox'] = $new_checkbox;
+
+			if (!empty($this->post['search'])) {
+				$condition['field']['search_name'] = trim($this->post['search']);
+			} else {
+				$condition['field']['search_name'] = '';
+			}
+			
 
 			// 为空的分类 加载全部权限的分类内容
 			if ($this->post['top_cate'] == '' && !isset($this->post['filed']['cate_id']) ) {
-				// dump(123123);
-				$admin = new \app\admin\model\GujiAdmin();
-				$username = session('username');
-				$data = $admin->where(['username'=>$username])->find();
-				// var_dump($data['is_cate']);
-				$cate = explode(',', $data['is_cate']);
-				// var_dump($cate);
-				$condition['field']['cate_id'] = $cate;
+				$condition['field']['cate_id'] = $cate_id_list;
 			} else {
-				// dump(321312);
-				// $condition['field']['cate_id'] = $this->post['top_cate'];
 				if ($this->post['top_cate'] != '') {
 					$condition['field']['cate_id'] = $this->post['top_cate'];
 				} else {
@@ -149,18 +142,23 @@ class Search {
 				}
 			}
 			
-			// dump($condition);
+			if (!isset($this->post['left_cate']['cate_bid'])) {
+				$condition['field']['cate_bid'] = '';
+			} else {
+				$condition['field']['cate_bid'] = $this->post['left_cate']['cate_bid'];
+			}
+
+			if (!isset($this->post['left_cate']['cate_wbid'])) {
+				$condition['field']['cate_wbid'] = '';
+			} else {
+				$condition['field']['cate_wbid'] = $this->post['left_cate']['cate_wbid'];
+			}
+
+			dump($condition);
 			return $condition;
 
 		}
-		
 
-		// exit;
-		// dump($condition);
-		// exit;
-		// 判断热门是不是等于空
-		
-		
 		$condition = array();
 		return $condition;
 
@@ -186,8 +184,6 @@ class Search {
 	}
 
 
-
-	// 高级搜索
 
 
 }

@@ -383,7 +383,7 @@ $("span").on("click",function(){
 
  		var searchValue = $("#search_key").val();
 
- 		// 循环赋值第一分类
+ 		// 循环获取第一分类
  		$(".cate_id").each(function(ii,vv){
 		    //ii 指第几个元素的序列号。
 		    //vv 指遍历得到的元素。
@@ -391,6 +391,20 @@ $("span").on("click",function(){
 		    	// console.log($(vv).html());
 		    	// console.log($(vv).attr('value'));
 		    	cate_id = $(vv).attr('value')
+		    }
+		});
+
+ 		// 循环获取第二分类
+ 		$(".cate_bid").each(function(ii,vv){
+		    if ($(vv).attr('is_left') == 1) {
+		    	cate_bid = $(vv).attr('value')
+		    }
+		});
+
+		// 循环获取第三分类
+ 		$(".cate_wbid").each(function(ii,vv){
+		    if ($(vv).attr('is_left') == 1) {
+		    	cate_wbid = $(vv).attr('value')
 		    }
 		});
 
@@ -487,7 +501,8 @@ function submitForm(href, cate_id, cate_bid='', cate_wbid='', page='', searchVal
     $("body").find("form").append("<input type='text' name='" + 'left_cate[cate_bid]' + "' value = '" + cate_bid + "'></input>");
     $("body").find("form").append("<input type='text' name='" + 'left_cate[cate_wbid]' + "' value = '" + cate_wbid + "'></input>");
     $("body").find("form").append("<input type='text' name='" + 'page' + "' value = '" + page + "'></input>");
-     $("body").find("form").append("<input type='text' name='" + 'search' + "' value = '" + searchValue + "'></input>");
+    $("body").find("form").append("<input type='text' name='" + 'search' + "' value = '" + searchValue + "'></input>");
+    $("body").find("form").append("<input type='text' name='" + 'checkbox' + "' value = '" + checkbox + "'></input>");
     // });
     $("body").find("form").submit();
 

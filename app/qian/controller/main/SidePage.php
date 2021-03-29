@@ -100,8 +100,9 @@ class SidePage {
                     break;
                 }
 
-                foreach($value[0] as $child_value) {
+                foreach($value[0] as $t_key=>$child_value) {
                     if ( $child_value['id'] == $left_cate ) {
+                        $list_array[$key][0][$t_key]['child_action'] = 1;
                         $list_array[$key]['action'] = 1;
                         break;
                     }
@@ -222,12 +223,32 @@ class SidePage {
 
 
         if ( !empty($condition['action']) and $condition['action'] == 'search' ) {
-            
+
             // 查询搜索页数据总数 - 分页总数
-            $count = $model
+            if ( $condition['field']['cate_bid'] == '' && $condition['field']['cate_wbid'] == '' ) {
+                $count = $model
                 ->where($condition['field']['con'], $condition['field']['type'], $condition['field']['name'])
                 ->where('cate_id', 'in', $condition['field']['cate_id'])
                 ->count();
+            } else if ( $condition['field']['cate_bid'] == '' &&  $condition['field']['cate_wbid'] != '' ) {
+                $count = $model
+                ->where($condition['field']['con'], $condition['field']['type'], $condition['field']['name'])
+                ->where('cate_id', 'in', $condition['field']['cate_id'])
+                ->where('cate_wbid', 'in', $condition['field']['cate_wbid'])
+               ->count();
+            } else if ( $condition['field']['cate_bid'] != '' &&  $condition['field']['cate_wbid'] == '' ) {
+                $count = $model
+                ->where($condition['field']['con'], $condition['field']['type'], $condition['field']['name'])
+                ->where('cate_id', 'in', $condition['field']['cate_id'])
+                ->where('cate_bid', 'in', $condition['field']['cate_bid'])
+                ->count();
+            }
+            // $count = $model
+            //     ->where($condition['field']['con'], $condition['field']['type'], $condition['field']['name'])
+            //     ->where('cate_id', 'in', $condition['field']['cate_id'])
+            //     ->where('cate_bid', 'in', $condition['field']['cate_bid'])
+            //     ->where('cate_wbid', 'in', $condition['field']['cate_wbid'])
+            //     ->count();
 
         } else if ( !empty($condition['action']) and $condition['action'] == 'high_search' ) {
             
@@ -262,10 +283,25 @@ class SidePage {
         if ( !empty($condition['action']) and $condition['action'] == 'search' ) {
             // 查询搜索分页数据
             
-            $list = $model
+            if ( $condition['field']['cate_bid'] == '' && $condition['field']['cate_wbid'] == '' ) {
+                $list = $model
                 ->where($condition['field']['con'], $condition['field']['type'], $condition['field']['name'])
                 ->where('cate_id', 'in', $condition['field']['cate_id'])
                 ->limit($search_num, 8)->select();
+            } else if ( $condition['field']['cate_bid'] == '' &&  $condition['field']['cate_wbid'] != '' ) {
+                $list = $model
+                ->where($condition['field']['con'], $condition['field']['type'], $condition['field']['name'])
+                ->where('cate_id', 'in', $condition['field']['cate_id'])
+                ->where('cate_wbid', 'in', $condition['field']['cate_wbid'])
+                ->limit($search_num, 8)->select();
+            } else if ( $condition['field']['cate_bid'] != '' &&  $condition['field']['cate_wbid'] == '' ) {
+                $list = $model
+                ->where($condition['field']['con'], $condition['field']['type'], $condition['field']['name'])
+                ->where('cate_id', 'in', $condition['field']['cate_id'])
+                ->where('cate_bid', 'in', $condition['field']['cate_bid'])
+                ->limit($search_num, 8)->select();
+            }
+            
 
         } else if ( !empty($condition['action']) and $condition['action'] == 'high_search' ) {
             

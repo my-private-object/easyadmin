@@ -52,7 +52,13 @@
 		</div> -->
 		<div id="complex_search" >
 			<div id="resources_search" >资源搜索</div>
-			<div id="search_box" ><input id="search_key" type="text" maxlength="45" /></div>
+			<div id="search_box" >
+				{notempty name="$data['rightData']['field']['field']['search_name']" }
+					<input id="search_key" type="text" maxlength="45" value="{$data['rightData']['field']['field']['search_name']}" />
+				{else/}
+					<input id="search_key" type="text" maxlength="45" value="" />
+				{/notempty}
+			</div>
 			<div id="search_button" >
 				<span class="search" style="cursor:pointer;" href="{:url('/gj/index/searchPage')}">搜索</span>
 			</div>
@@ -62,11 +68,14 @@
 			<!-- <form action="" method="get">  -->
 			<ul id="checkbox-d">
 				<!-- <li>全部字段</li>		 -->
-				<li style="margin-left: 6px"><input name="Fruit" type="checkbox" value="1" />题名 </li>
-				<li><input name="Fruit" type="checkbox" value="2" />时间 </li>
-				<li><input name="Fruit" type="checkbox" value="3" />著者 </li>
-				<li><input name="Fruit" type="checkbox" value="4" />出版机构 </li>
-				<li><input name="Fruit" type="checkbox" value="5" />出版地 </li>
+				<li style="margin-left: 6px"><input name="Fruit" type="checkbox" value="1" 
+					{notempty name="$data['rightData']['field']['field']" }{in name="1" value="$data['rightData']['field']['field']['checkbox']"}checked="checked"{/in}{/notempty}
+				/>题名 </li>
+
+				<li><input name="Fruit" type="checkbox" value="2" {notempty name="$data['rightData']['field']['field']" }{in name="2" value="$data['rightData']['field']['field']['checkbox']"}checked="checked"{/in}{/notempty} />时间 </li>
+				<li><input name="Fruit" type="checkbox" value="3" {notempty name="$data['rightData']['field']['field']" }{in name="3" value="$data['rightData']['field']['field']['checkbox']"}checked="checked"{/in}{/notempty} />著者 </li>
+				<li><input name="Fruit" type="checkbox" value="4" {notempty name="$data['rightData']['field']['field']" }{in name="4" value="$data['rightData']['field']['field']['checkbox']"}checked="checked"{/in}{/notempty} />出版机构 </li>
+				<li><input name="Fruit" type="checkbox" value="5" {notempty name="$data['rightData']['field']['field']" }{in name="5" value="$data['rightData']['field']['field']['checkbox']"}checked="checked"{/in}{/notempty} />出版地 </li>
 			</ul>
 			<!-- </form>  -->
 		</div>
@@ -91,28 +100,48 @@
 
 				{volist name="$data['topData']['top_list']" id="vo"}
 					{if condition="$vo['id'] eq $data['topData']['top_cate'] "}
-						<div class="left_header_name">{$vo['title']}</div>
+						<div class="left_header_name">中国近代{$vo['title']}</div>
 					{/if}
 				{/volist}
 				<!-- <div class="left_header_name">XX分类法</div> -->
 			</div>
 			<ul id="header_ul">
-				{volist name="$data['leftData']['left_list']" id="vo"}
-				{if condition="$vo['pid'] eq $data['topData']['top_cate']"}
+				{volist name="$data['leftData']['left_list']" id="vo" key="index_key"}
+				<!-- {$index_key} -->
 				<li class="nav">
+
 					<div class="left_title">
 					{if condition="$vo['id'] eq $data['leftData']['left_cate'] "}					
-					<span class="cate_bid" style="cursor:pointer" href="{:url('/gj/index/sidepage')}" value="{$vo['id']}" is_left="1">{$vo['title']}</span>
+					<span class="cate_bid" style="cursor:pointer;color:red;" href="{:url('/gj/index/sidepage')}" value="{$vo['id']}" is_left="1">{$vo['title']}</span>
 					{else/}
 					<span class="cate_bid" style="cursor:pointer" href="{:url('/gj/index/sidepage')}" value="{$vo['id']}" is_left="">{$vo['title']}</span>
 					{/if}
+					
+					{php} if(isset($vo['action'])) { {/php}			
 					<span class="symbol" style="cursor:pointer; float:right; margin-right:22px;" >
-						<img class='jia' style="width: 12px; width: 12px; margin-top:3px;" src="__STATIC__/qian/images/jia.png">
+						<img class='jia' style="width: 12px; width: 12px; margin-top:3px;" src="__STATIC__/qian/images/jia.png" hidden>
+						<img class='jian_hei' style="width: 12px; width: 12px; margin-top:3px;" src="__STATIC__/qian/images/jian_hei.png" >
+					</span>
+					{php} } else { {/php}
+					<span class="symbol" style="cursor:pointer; float:right; margin-right:22px;" >
+						<img class='jia' style="width: 12px; width: 12px; margin-top:3px;" src="__STATIC__/qian/images/jia.png" >
 						<img class='jian_hei' style="width: 12px; width: 12px; margin-top:3px;" src="__STATIC__/qian/images/jian_hei.png" hidden>
 					</span>
+					{php}}{/php}
 					</div>
-					{volist name="$data['leftData']['left_list']" id="two_vo"}
-					{if condition="$two_vo['pid'] eq $vo['id']"}
+
+					{volist name="$data['leftData']['left_list'][$index_key - 1][0]" id="two_vo"}
+					{php} if(isset($vo['action'])) { {/php}
+					<ul style="margin-top: 5px;">
+						<li>
+							{if condition="$two_vo['id'] eq $data['leftData']['left_cate'] "}			
+							<span class="cate_wbid" style="cursor:pointer;color:red;" href="{:url('/gj/index/sidepage')}" value="{$two_vo['id']}" is_left="1">{$two_vo['title']}</span>
+							{else/}
+							<span class="cate_wbid" style="cursor:pointer" href="{:url('/gj/index/sidepage')}" value="{$two_vo['id']}" is_left="">{$two_vo['title']}</span>
+							{/if}
+						</li>
+					</ul>
+					{php} } else { {/php}
 					<ul style="margin-top: 5px;" hidden>
 						<li>
 							{if condition="$two_vo['id'] eq $data['leftData']['left_cate'] "}			
@@ -122,10 +151,11 @@
 							{/if}
 						</li>
 					</ul>
-					{/if}
+					{php}}{/php}
 					{/volist}
+
+
 				</li>
-				{/if}
 				{/volist}
 
 				<!-- <li class="nav" >
@@ -282,6 +312,16 @@
 				<span id="hidden_2" value="{$data['rightData']['field']['field']['type']}"  hidden></span>
 				<span id="hidden_3" value="{$data['rightData']['field']['field']['name']}"  hidden></span>
 				<span id="hidden_5" value="{$data['rightData']['field']['field']['cate_id']}"  hidden></span>
+				<span id="hidden_6" value="{$data['rightData']['field']['field']['cate_bid']}"  hidden></span>
+				<span id="hidden_7" value="{$data['rightData']['field']['field']['cate_wbid']}"  hidden></span>
+				<span id="hidden_8" value="{$data['rightData']['field']['field']['search_name']}"  hidden></span>
+
+				<input name="Fruit_page" type="checkbox" value="1" {in name="1" value="$data['rightData']['field']['field']['checkbox']"}checked="checked"{/in} hidden />
+				<input name="Fruit_page" type="checkbox" value="2" {in name="2" value="$data['rightData']['field']['field']['checkbox']"}checked="checked"{/in} hidden />
+				<input name="Fruit_page" type="checkbox" value="3" {in name="3" value="$data['rightData']['field']['field']['checkbox']"}checked="checked"{/in} hidden />
+				<input name="Fruit_page" type="checkbox" value="4" {in name="4" value="$data['rightData']['field']['field']['checkbox']"}checked="checked"{/in} hidden />
+				<input name="Fruit_page" type="checkbox" value="5" {in name="5" value="$data['rightData']['field']['field']['checkbox']"}checked="checked"{/in} hidden />	
+
 				{/notempty}
 				{notempty name="$data_json"}
 				<span id="hidden_4" href="{:url('/gj/index/highSearchPage')}" value="{$data_json}" hidden ></span>
@@ -381,7 +421,7 @@ $("span").on("click",function(){
  		// alert(checkbox);
  		var searchValue = $("#search_key").val();
 
- 		// 循环赋值第一分类
+ 		// 循环获取第一分类
  		$(".cate_id").each(function(ii,vv){
 		    //ii 指第几个元素的序列号。
 		    //vv 指遍历得到的元素。
@@ -389,6 +429,20 @@ $("span").on("click",function(){
 		    	// console.log($(vv).html());
 		    	// console.log($(vv).attr('value'));
 		    	cate_id = $(vv).attr('value')
+		    }
+		});
+
+ 		// 循环获取第二分类
+ 		$(".cate_bid").each(function(ii,vv){
+		    if ($(vv).attr('is_left') == 1) {
+		    	cate_bid = $(vv).attr('value')
+		    }
+		});
+
+ 		// 循环获取第三分类
+ 		$(".cate_wbid").each(function(ii,vv){
+		    if ($(vv).attr('is_left') == 1) {
+		    	cate_wbid = $(vv).attr('value')
 		    }
 		});
 
@@ -460,10 +514,23 @@ function page(e) {
  			page = $("input[name='jump_page']").val();
  		}
  		checkbox = ''
+
+ 		$("input[name='Fruit_page']:checked").each(function (index, item) {
+        
+	        if ($("input[name='Fruit']:checked").length-1==index) {
+	            checkbox += $(this).val();
+	        } else {
+	            checkbox += $(this).val() + ",";
+	        }  
+	    });
+
  		var con = $("#hidden_1").attr('value');
  		var type = $("#hidden_2").attr('value');
  		var name = $("#hidden_3").attr('value');
  		var cate_id = $("#hidden_5").attr('value');
+ 		var cate_bid = $("#hidden_6").attr('value');
+ 		var cate_wbid = $("#hidden_7").attr('value');
+ 		var search_name = $("#hidden_8").attr('value');
  		console.log(con);
  		console.log(type);
  		console.log(name);
@@ -471,9 +538,15 @@ function page(e) {
  			"con": con,
  			"type": type,
  			"name": name,
- 			"cate_id": cate_id
+ 			"cate_id": cate_id,
+ 			"cate_bid": cate_bid,
+ 			"cate_wbid": cate_wbid,
+ 			"search_name": search_name,
+ 			"checkbox": checkbox
  		}
  		console.log(search_page);
+ 		console.log(checkbox);
+
  		// 获取上部分类ID
  		// var cate_id = getTopMenuCate();
  		// 获取左侧分类ID
@@ -508,6 +581,10 @@ function submitForm(href, cate_id, cate_bid='', cate_wbid='', page='', searchVal
 	    $("body").find("form").append("<input type='text' name='" + 'search_field[type]' + "' value = '" + search_page['type'] + "'></input>");
 	    $("body").find("form").append("<input type='text' name='" + 'search_field[name]' + "' value = '" + search_page['name'] + "'></input>");
 	    $("body").find("form").append("<input type='text' name='" + 'search_field[cate_id]' + "' value = '" + search_page['cate_id'] + "'></input>");
+	    $("body").find("form").append("<input type='text' name='" + 'search_field[cate_bid]' + "' value = '" + search_page['cate_bid'] + "'></input>");
+	    $("body").find("form").append("<input type='text' name='" + 'search_field[cate_wbid]' + "' value = '" + search_page['cate_wbid'] + "'></input>");
+	    $("body").find("form").append("<input type='text' name='" + 'search_field[search_name]' + "' value = '" + search_page['search_name'] + "'></input>");
+	    $("body").find("form").append("<input type='text' name='" + 'search_field[checkbox]' + "' value = '" + search_page['checkbox'] + "'></input>");
     }
 
     $("body").find("form").submit();
