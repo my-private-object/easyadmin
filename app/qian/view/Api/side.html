@@ -171,7 +171,42 @@
 			<div id="navigation" >
 				<div id="navigation_content" >
 					<span>当前位置：</span>
-					<a href="#">首页</a> / <a href="#">图书</a> / <a href="#">军事</a>
+					{if condition="$data['topData']['top_cate'] eq '' "}
+					<span>全部</span>
+					{else/}
+						{volist name="$data['topData']['top_list']" id="vo"}
+						{if condition="$vo['id'] eq $data['topData']['top_cate'] "}	
+							<span>{$vo['title']}</span>
+						{/if}
+						{/volist}
+					{/if}
+
+					{if condition="$data['leftData']['left_cate'] neq '' "}
+					{volist name="$data['leftData']['left_list']" id="l_vo"}
+					{notempty name="$l_vo['action']" }
+						<span> / {$l_vo['title']}</span>
+					{/notempty}
+					{/volist}
+					{/if}
+
+					{if condition="$data['leftData']['left_cate'] neq '' "}
+					{volist name="$data['leftData']['left_list']" id="l_vo"}
+					{notempty name="$l_vo['action']" }
+					{if condition="$l_vo['pid'] eq $data['leftData']['left_cate']"}
+						<span> / {$l_vo['title']}</span>
+					{else/}
+						{volist name="$l_vo[0]" id="l_vo_child"}
+						{if condition="$l_vo_child['id'] eq $data['leftData']['left_cate']"}
+							<span> / {$l_vo_child['title']}</span>
+						{/if}
+						{/volist}
+					{/if}
+					{/notempty}
+					{/volist}
+					{/if}
+
+
+
 				</div>
 				<div id="sort" >
 					<div id="sort_content" >
