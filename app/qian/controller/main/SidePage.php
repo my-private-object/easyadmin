@@ -157,7 +157,7 @@ class SidePage {
     public function rightMenu() {
 
         $post = $_POST;    
-        // var_dump($post);
+        dump($post);
 
         // 判断 left_cate 是否存在 并生成查询条件
         if (!empty($post['left_cate'])){
@@ -183,19 +183,37 @@ class SidePage {
         if ( !is_numeric($now_page) ) {
             $now_page = 1;
         }
+        dump($condition);
+        // 列表的展示方式
+        $param = array();
+        if ( empty($post['check_type']['list_type']) || $post['check_type']['list_type'] == 1 ) {
+            $param['list_type'] = 1;
+        } else {
+            $param['list_type'] = 2;
+        }
+
+        // 列表的排序方式
+        if ( empty($post['check_type']['is_sort']) || $post['check_type']['is_sort'] == 1 ) {
+            $param['is_sort'] = 1;
+        } else if ( $post['check_type']['is_sort'] == 2 ) {
+            $param['is_sort'] = 2;
+        } else if ( $post['check_type']['is_sort'] == 3 ) {
+            $param['is_sort'] = 3;
+        }
 
         // 创建模型实例
         $books = new \app\admin\model\GujiBooks;
 
         // 自己写分页输出
-        $page_data = $this->myPage($books, $condition, $now_page);
+        $page_data = $this->myPage($books, $condition, $now_page, $param['is_sort']);
 
         // var_dump($page_data['page']);
         // var_dump($condition);
         // var_dump($left_cate);
         $rightData = array(
             'list'=>$page_data['list'], 
-            'page'=>$page_data['page']
+            'page'=>$page_data['page'],
+            'param'=>$param
         );
         
         return $rightData;
@@ -219,7 +237,7 @@ class SidePage {
     }
 
     // 分页 - 临时用 - 有时间再改
-    public function myPage($model, $condition, $now_page=1) {
+    public function myPage($model, $condition, $now_page=1, $param) {
 
 
         if ( !empty($condition['action']) and $condition['action'] == 'search' ) {
@@ -279,6 +297,15 @@ class SidePage {
             $search_num = ($now_page - 1) * 8;
         }
 
+        // 指定排序语句
+        if ($param == 3) {
+            $order = 'book_time desc';
+        } else if ($param == 2) {
+            $order = 'header_sort desc';
+        } else if ($param == 1) {
+            $order = 'click desc';
+        }
+
         // var_dump($search_num);
         if ( !empty($condition['action']) and $condition['action'] == 'search' ) {
             // 查询搜索分页数据
@@ -287,19 +314,19 @@ class SidePage {
                 $list = $model
                 ->where($condition['field']['con'], $condition['field']['type'], $condition['field']['name'])
                 ->where('cate_id', 'in', $condition['field']['cate_id'])
-                ->limit($search_num, 8)->select();
+                ->limit($search_num, 8)->order($order)->select();
             } else if ( $condition['field']['cate_bid'] == '' &&  $condition['field']['cate_wbid'] != '' ) {
                 $list = $model
                 ->where($condition['field']['con'], $condition['field']['type'], $condition['field']['name'])
                 ->where('cate_id', 'in', $condition['field']['cate_id'])
                 ->where('cate_wbid', 'in', $condition['field']['cate_wbid'])
-                ->limit($search_num, 8)->select();
+                ->limit($search_num, 8)->order($order)->select();
             } else if ( $condition['field']['cate_bid'] != '' &&  $condition['field']['cate_wbid'] == '' ) {
                 $list = $model
                 ->where($condition['field']['con'], $condition['field']['type'], $condition['field']['name'])
                 ->where('cate_id', 'in', $condition['field']['cate_id'])
                 ->where('cate_bid', 'in', $condition['field']['cate_bid'])
-                ->limit($search_num, 8)->select();
+                ->limit($search_num, 8)->order($order)->select();
             }
             
 
@@ -311,7 +338,7 @@ class SidePage {
         } else {
 
             // 查询分页数据
-            $list = $model->where($condition)->limit($search_num, 8)->select();
+            $list = $model->where($condition)->limit($search_num, 8)->order($order)->select();
 
         }
         

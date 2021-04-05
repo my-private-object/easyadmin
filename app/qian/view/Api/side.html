@@ -205,34 +205,94 @@
 					{/volist}
 					{/if}
 
-
-
 				</div>
 				<div id="sort" >
 					<div id="sort_content" >
-						<span><a href="#">图片</a> / <a href="#">列表</a></span>
+						<div style="float:left;">
+							{if condition="$data['rightData']['param']['list_type'] eq 1"}
+							<span class="list_1" href="{:url('/gj/index/sidepage')}" value="1" is_type="1" style="color:red;cursor:pointer;">列表</span>
+							{else/}
+							<span class="list_1" href="{:url('/gj/index/sidepage')}" value="1" is_type="0" style="cursor:pointer;">列表</span>
+							{/if}
+							/
+							{if condition="$data['rightData']['param']['list_type'] eq 2"}
+							<span class="list_1" href="{:url('/gj/index/sidepage')}" value="2" is_type="1" style="color:red;cursor:pointer;">图片</span>
+							{else/}
+							<span class="list_1" href="{:url('/gj/index/sidepage')}" value="2" is_type="0" style="cursor:pointer;">图片</span>
+							{/if}
+						</div>
 						<span style="margin-left: 20px" >
-							<a href="#">点击量排序</a> / 
-							<a href="#">首字母排序</a> / 
-							<a href="#">时间排序</a>
+
+							{if condition="$data['rightData']['param']['is_sort'] eq 3 "}
+							<span class="is_sort" href="{:url('/gj/index/sidepage')}" style="color:red;cursor:pointer;" value="3" is_sort="1">点击量排序</span>
+							{else /}
+							<span class="is_sort" href="{:url('/gj/index/sidepage')}" style="cursor:pointer;" value="3" is_sort="0">点击量排序</span>
+							{/if}
+							 / 
+							{if condition="$data['rightData']['param']['is_sort'] eq 2 "}
+							<span class="is_sort" href="{:url('/gj/index/sidepage')}" style="color:red;cursor:pointer;" value="2" is_sort="1">首字母排序</span>
+							{else /}
+							<span class="is_sort" href="{:url('/gj/index/sidepage')}" style="cursor:pointer;" value="2" is_sort="0">首字母排序</span>
+							{/if}
+							 / 
+							{if condition="$data['rightData']['param']['is_sort'] eq 1 "}
+							<span class="is_sort" href="{:url('/gj/index/sidepage')}" style="color:red;cursor:pointer;" value="1" is_sort="1">时间排序</span>
+							{else /}
+							<span class="is_sort" href="{:url('/gj/index/sidepage')}" style="cursor:pointer;" value="1" is_sort="0">时间排序</span>
+							{/if}
+
 						</span>
 					</div>
 				</div>
 			</div>
 
 			<div id="content_list" >
-
-				<!-- <div id="sort" >
-					<div id="sort_content" >
-						<span style="float:left;"><a href="#">图片</a> / <a href="#">列表</a></span>
-						<span style="float:right;">
-							<a href="#">点击量排序</a> / 
-							<a href="#">首字母排序</a> / 
-							<a href="#">时间排序</a>
-						</span>
-					</div>
-				</div> -->
-				<ul>
+				{php} if (empty($data['rightData']['param']['list_type']) or $data['rightData']['param']['list_type'] == 1) { {/php}
+				<ul class="list_1" list_type="1">
+					{volist name="$data['rightData']['list']" id="vo"}
+					<li style="width:685px;height:168px;margin-top: 15px; margin-left: 15px;">
+						<div class="content_image">
+							<a href="{:url('/gj/index/details',['book'=>$vo.id] )}" target="_blank" >
+								<img src="{$vo.logo}" />
+							</a>
+						</div>
+						<div class="content_info">
+							<div class="info_frame" style="margin-top: 20px; " >
+								<span class="info_list" style="color:#446D6D;width:57px;">书&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</span>
+								<a href="{:url('/gj/index/details',['book'=>$vo.id] )}" target="_blank">
+									<span class="info_list" style="color:black;width:357px;">{$vo.title}</span>
+								</a>
+							</div>
+							<div class="info_frame" >
+								<span class="info_list" style="color:#446D6D;width:57px;">著&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;者:</span>
+								<!-- <a href="#"> -->
+								<span class="info_list" style="color:black;width:357px;">{$vo.id}{$vo.title}</span>
+								<!-- </a> -->
+							</div>
+							<div class="info_frame" >
+								<span class="info_list" style="color:#446D6D;width:57px;">出版机构:</span>
+								<!-- <a href="#"> -->
+									<span class="info_list" style="width:357px;">{$vo.id}{$vo.title}</span>
+								<!-- </a> -->
+							</div>
+							<div class="info_frame" >
+								<span class="info_list" style="color:#446D6D;width:57px;">出版时间:</span>
+								<!-- <a href="#"> -->
+									<span class="info_list" style="width:357px;">{$vo.id}{$vo.title}</span>
+								<!-- </a> -->
+							</div>
+						</div>
+						<div class="content_href" style="width:20px;height:121px;border-top:0px;border-right:1px solid #A8A8A8;float:right;margin-right: 15px;margin-top: 22px;" >
+							<a href="{:url('/gj/index/details',['book'=>$vo.id] )}" target="_blank" style="line-height:15px;margin:0px;width:20px;height:10px;" >阅读</a><p>
+							<a href="#" style="line-height:15px;margin:0px;width:20px;height:10px;">收藏</a><p>
+							<a href="{:url('/gj/index/details',['book'=>$vo.id] )}" target="_blank" style="line-height:15px;margin:0px;width:20px;height:10px;">详情</a>
+						</div>
+					</li>
+					{/volist}
+					<div style=" clear:both;"></div>
+				</ul>
+				{php} } else { {/php}
+				<ul class="list_1" list_type="2">
 					{volist name="$data['rightData']['list']" id="vo" mod="2"}
 
 					{eq name="mod" value="1"}
@@ -307,6 +367,7 @@
 					</li>-->
 					<div style=" clear:both;"></div>
 				</ul>
+				{php} } {/php}
 				<div style=" clear:both;"></div>
 			</div>
 
@@ -321,7 +382,7 @@
 					<span>
 					<span class="page" style="cursor:pointer; " href="{:url('/gj/index/sidepage')}" page="1"> 首页 </span>
 					<span class="page" style="cursor:pointer" href="{:url('/gj/index/sidepage')}" page="{$data['rightData']['page']['up_page']}"> 上一页 </span>
-					<span class="page" style="cursor:pointer" href="{:url('/gj/index/sidepage')}" page="{$data['rightData']['page']['down_page']}"> 下一页 </span>
+					<span id="list_type_page" class="page" style="cursor:pointer" href="{:url('/gj/index/sidepage')}" page="{$data['rightData']['page']['down_page']}"> 下一页 </span>
 					<span class="page" style="cursor:pointer" href="{:url('/gj/index/sidepage')}" page="{$data['rightData']['page']['all_page']}"> 尾页 </span>
 					</span>
 				</span>
@@ -367,10 +428,12 @@ $(".symbol").on("click",function(){
 
 $("span").on("click",function(){
 
+	window.is_type = 0;
+
 	// 获取当前 分类的基本属性 value 类别值，href 连接，class 类别属性 用来判定 1级或2级
-	var href = $(this).attr('href');
-	var value = $(this).attr('value');
-	var class_name = $(this).attr('class');
+	href = $(this).attr('href');
+	value = $(this).attr('value');
+	class_name = $(this).attr('class');
 
 	var cate_id = '';
 	var cate_bid = '';
@@ -384,7 +447,7 @@ $("span").on("click",function(){
 		} else {
 			cate_id = value;
 		}
-		
+
 		submitForm(href, cate_id, cate_bid, cate_wbid)
 
  	} else if(class_name == 'cate_bid') {		// 2级分类的跳转
@@ -400,9 +463,33 @@ $("span").on("click",function(){
  		submitForm(href, cate_id, cate_bid, cate_wbid)
 
  	} else if(class_name == 'page') {			// 分页的跳转
-
  		page($(this));
+ 	} else if(class_name == 'list_1') {
+ 		window.is_type = 1;
+ 		window.list_type = value;
 
+ 		$(".is_sort").each(function(ii,vv){
+		    if ($(vv).attr('is_sort') == 1) {
+		    	is_sort = $(vv).attr('value');
+		    }
+		});
+
+ 		window.is_sort = is_sort;
+
+ 		listTypePage($(this));
+ 	} else if(class_name == 'is_sort') {
+ 		window.is_type = 2;
+ 		window.is_sort = value;
+
+ 		$(".list_1").each(function(ii,vv){
+		    if ($(vv).attr('is_type') == 1) {
+		    	list_type = $(vv).attr('value');
+		    }
+		});
+
+ 		window.list_type = list_type
+
+ 		listTypePage($(this));
  	} else if ( class_name == 'search' ) {
 
  		var checkbox = '';
@@ -520,10 +607,54 @@ function page(e, cate_id, leftCate ) {
 
 }
 
+// 列表类型 - 分页提交
+function listTypePage(e, cate_id, leftCate ) {
+
+	 	// 获取 page 基本属性 - page 页码数，href 连接
+ 		var page = $("#list_type_page").attr('page');
+ 		page = page - 1;
+ 		href = $(e).attr('href');
+
+ 		// 获取上部分类ID
+ 		var cate_id = getTopMenuCate();
+ 		// 获取左侧分类ID
+ 		var left_cate = getLeftMenuCate();
+
+ 		submitForm(href, cate_id, left_cate.cate_bid, left_cate.cate_wbid, page)
+
+}
+
+// 获取右侧内容展示条件
+function rightList() {
+
+	list_type = '';
+	is_sort = '';
+
+	// 循环获取第二分类
+	$(".list_1").each(function(ii,vv){
+	    if ($(vv).attr('is_type') == 1) {
+	    	list_type = $(vv).attr('value');
+	    }
+	});
+
+	$(".is_sort").each(function(ii,vv){
+	    if ($(vv).attr('is_sort') == 1) {
+	    	is_sort = $(vv).attr('value');
+	    }
+	});
+
+	var param = {
+		"list_type": list_type,
+		"is_sort": is_sort
+	}
+
+	return param;
+
+}
 
 // 表单提交
 function submitForm(href, cate_id, cate_bid='', cate_wbid='', page='', searchValue='', checkbox='') {
-
+	
     $("body").append("<form></form>");
     // $("body").find("form").attr("action", 'http://localhost:81'+href);
     $("body").find("form").attr("action", href);
@@ -539,6 +670,20 @@ function submitForm(href, cate_id, cate_bid='', cate_wbid='', page='', searchVal
     $("body").find("form").append("<input type='text' name='" + 'search' + "' value = '" + searchValue + "'></input>");
     $("body").find("form").append("<input type='text' name='" + 'checkbox' + "' value = '" + checkbox + "'></input>");
     // });
+    param = {};
+    if (window.is_type == 1 || window.is_type == 2) {
+    	param['list_type'] = window.list_type;
+    	param['is_sort'] = window.is_sort;
+    } else {
+    	param = rightList();	
+    }
+    
+    console.log(param['list_type']);
+    // return
+    $("body").find("form").append("<input type='text' name='" + 'check_type[list_type]' + "' value = '" + param['list_type'] + "'></input>");
+
+    $("body").find("form").append("<input type='text' name='" + 'check_type[is_sort]' + "' value = '" + param['is_sort'] + "'></input>");
+
     $("body").find("form").submit();
 
 }
