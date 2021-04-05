@@ -277,12 +277,13 @@ class SidePage {
             // dump($count);
             // exit;
         } else {
-
+            echo 123123;
             // 查询分页总数
             $count = $model->where($condition)->count();
 
         }
-
+        dump($count);
+        // return;
         // 计算页面总数
         $all_page = ceil($count / 8);
 

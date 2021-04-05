@@ -354,7 +354,7 @@
 					<span>
 					<span class="page" style="cursor:pointer; " href="{:url('/gj/index/searchPage')}" page="1"> 首页 </span>
 					<span class="page" style="cursor:pointer" href="{:url('/gj/index/searchPage')}" page="{$data['rightData']['search_list']['page']['up_page']}"> 上一页 </span>
-					<span class="page" style="cursor:pointer" href="{:url('/gj/index/searchPage')}" page="{$data['rightData']['search_list']['page']['down_page']}"> 下一页 </span>
+					<span id="list_type_page" class="page" style="cursor:pointer" href="{:url('/gj/index/searchPage')}" page="{$data['rightData']['search_list']['page']['down_page']}"> 下一页 </span>
 					<span class="page" style="cursor:pointer" href="{:url('/gj/index/searchPage')}" page="{$data['rightData']['search_list']['page']['all_page']}"> 尾页 </span>
 					</span>
 				</span>
@@ -475,7 +475,7 @@ $("span").on("click",function(){
 
  		window.is_sort = is_sort;
 
- 		page($(this));
+ 		page($(this), 2);
  	} else if(class_name == 'is_sort') {
  		window.is_type = 2;
  		window.is_sort = value;
@@ -488,7 +488,7 @@ $("span").on("click",function(){
 
  		window.list_type = list_type
 
- 		page($(this));
+ 		page($(this), 2);
  	} else if ( class_name == 'search' ) {
 
  		var checkbox = '';
@@ -614,12 +614,23 @@ function rightList() {
 }
 
 // 分页提交
-function page(e) {
+function page(e, other_e=1) {
 
-	 	// 获取 page 基本属性 - page 页码数，href 连接
- 		page = $(e).attr('page');
- 		href = $(e).attr('href');
-
+		// 获取 page 基本属性 - page 页码数，href 连接
+		// page = $(e).attr('page');
+ 		// 	href = $(e).attr('href');
+ 		// 	
+ 		page = '';
+		if (other_e != 1) {
+	 		page = $("#list_type_page").attr('page');
+ 			page = page - 1;
+ 			href = $(e).attr('href');
+		} else {
+			page = $(e).attr('page');
+			href = $(e).attr('href');
+		}
+		console.log(page);
+		// return;
  		// 判断 input 输入框跳转
  		if ( page == 'jump_page') {
  			page = $("input[name='jump_page']").val();
@@ -698,6 +709,9 @@ function submitForm(href, cate_id, cate_bid='', cate_wbid='', page='', searchVal
     $("body").find("form").append("<input type='text' name='" + 'search' + "' value = '" + searchValue + "'></input>");
     $("body").find("form").append("<input type='text' name='" + 'checkbox' + "' value = '" + checkbox + "'></input>");
 
+    $("body").find("form").append("<input type='text' name='" + 'check_type[list_type]' + "' value = '" + param['list_type'] + "'></input>");
+
+	$("body").find("form").append("<input type='text' name='" + 'check_type[is_sort]' + "' value = '" + param['is_sort'] + "'></input>");
 
     if ( search_page != '' ) {
 	    $("body").find("form").append("<input type='text' name='" + 'search_field[con]' + "' value = '" + search_page['con'] + "'></input>");
