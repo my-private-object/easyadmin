@@ -183,7 +183,7 @@ class SidePage {
         if ( !is_numeric($now_page) ) {
             $now_page = 1;
         }
-        dump($condition);
+        // dump($condition);
         // 列表的展示方式
         $param = array();
         if ( empty($post['check_type']['list_type']) || $post['check_type']['list_type'] == 1 ) {

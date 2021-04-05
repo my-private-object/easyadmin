@@ -22,9 +22,27 @@ class Search {
 
 		// 获取条件 和 搜索值
 		$condition = $this->lowCondition();
+		dump($this->post);
+		
+		// 列表的展示方式
+        $param = array();
+        if ( empty($this->post['check_type']['list_type']) || $this->post['check_type']['list_type'] == 1 ) {
+            $param['list_type'] = 1;
+        } else {
+            $param['list_type'] = 2;
+        }
+
+        // 列表的排序方式
+        if ( empty($this->post['check_type']['is_sort']) || $this->post['check_type']['is_sort'] == 1 ) {
+            $param['is_sort'] = 1;
+        } else if ( $this->post['check_type']['is_sort'] == 2 ) {
+            $param['is_sort'] = 2;
+        } else if ( $this->post['check_type']['is_sort'] == 3 ) {
+            $param['is_sort'] = 3;
+        }
 
 		// 分页搜索
-		$page_data = $this->sidePage->myPage($this->model, $condition, $now_page);
+		$page_data = $this->sidePage->myPage($this->model, $condition, $now_page, $param['is_sort']);
 		// dump($condition);
 		// 拦截多个分类 - 多个分类只用 空 来表示
 		if ( isset($condition['field']['cate_id']) && is_array($condition['field']['cate_id']) ) {
@@ -33,7 +51,8 @@ class Search {
 
 		$data = array(
 			'search_list' => $page_data,
-			'field' => $condition
+			'field' => $condition,
+			'param' => $param
 		);
 
 		return $data;

@@ -158,32 +158,6 @@
 				</li>
 				{/volist}
 
-				<!-- <li class="nav" >
-					<span id="app" style="display:inline-block; width: 200px;" >宗教</span>
-					<span class="symbol" style="cursor:pointer;" >+</span>
-					<ul style="margin-top: 5px;" hidden>
-						<li><a href="#">宗教aaaa</a></li>
-						<li><a href="#">宗教bbbb</a></li>
-					</ul>
-				</li> -->
-			<!-- 	<li>社会科学</li>
-				<li>政治</li>
-				<li>法律</li>
-				<li>军事</li>
-				<li>经济</li>
-				<li>文化</li>
-				<li>艺术</li>
-				<li>教育</li>
-				<li>语言</li>
-				<li>文学</li>
-				<li>历史、地理</li>
-				<li>自然科学</li>
-				<li>医学</li>
-				<li>农业科学</li>
-				<li>工业技术</li>
-				<li>交通运输</li>
-				<li>综合性图书</li>
-				<li>其他</li> -->
 			</ul>
 		</div>
 		<div id="books_list" >
@@ -226,29 +200,97 @@
 				</div>
 				<div id="sort" >
 					<div id="sort_content" >
-						<span><a href="#">图片</a> / <a href="#">列表</a></span>
+						<div style="float:left;">
+							{if condition="$data['rightData']['param']['list_type'] eq 1"}
+							<span class="list_1" href="{:url('/gj/index/searchPage')}" value="1" is_type="1" style="color:red;cursor:pointer;">列表</span>
+							{else/}
+							<span class="list_1" href="{:url('/gj/index/searchPage')}" value="1" is_type="0" style="cursor:pointer;">列表</span>
+							{/if}
+							/
+							{if condition="$data['rightData']['param']['list_type'] eq 2"}
+							<span class="list_1" href="{:url('/gj/index/searchPage')}" value="2" is_type="1" style="color:red;cursor:pointer;">图片</span>
+							{else/}
+							<span class="list_1" href="{:url('/gj/index/searchPage')}" value="2" is_type="0" style="cursor:pointer;">图片</span>
+							{/if}
+						</div>
+						<span style="margin-left: 20px" >
+
+							{if condition="$data['rightData']['param']['is_sort'] eq 3 "}
+							<span class="is_sort" href="{:url('/gj/index/searchPage')}" style="color:red;cursor:pointer;" value="3" is_sort="1">点击量排序</span>
+							{else /}
+							<span class="is_sort" href="{:url('/gj/index/searchPage')}" style="cursor:pointer;" value="3" is_sort="0">点击量排序</span>
+							{/if}
+							 / 
+							{if condition="$data['rightData']['param']['is_sort'] eq 2 "}
+							<span class="is_sort" href="{:url('/gj/index/searchPage')}" style="color:red;cursor:pointer;" value="2" is_sort="1">首字母排序</span>
+							{else /}
+							<span class="is_sort" href="{:url('/gj/index/searchPage')}" style="cursor:pointer;" value="2" is_sort="0">首字母排序</span>
+							{/if}
+							 / 
+							{if condition="$data['rightData']['param']['is_sort'] eq 1 "}
+							<span class="is_sort" href="{:url('/gj/index/searchPage')}" style="color:red;cursor:pointer;" value="1" is_sort="1">时间排序</span>
+							{else /}
+							<span class="is_sort" href="{:url('/gj/index/searchPage')}" style="cursor:pointer;" value="1" is_sort="0">时间排序</span>
+							{/if}
+
+						</span>
+						<!-- <span><a href="#">图片</a> / <a href="#">列表</a></span>
 						<span style="margin-left: 20px" >
 							<a href="#">点击量排序</a> / 
 							<a href="#">首字母排序</a> / 
 							<a href="#">时间排序</a>
-						</span>
+						</span> -->
 					</div>
 				</div>
 			</div>
 
 			<div id="content_list" >
-
-				<!-- <div id="sort" >
-					<div id="sort_content" >
-						<span style="float:left;"><a href="#">图片</a> / <a href="#">列表</a></span>
-						<span style="float:right;">
-							<a href="#">点击量排序</a> / 
-							<a href="#">首字母排序</a> / 
-							<a href="#">时间排序</a>
-						</span>
-					</div>
-				</div> -->
-				<ul>
+								{php} if (empty($data['rightData']['param']['list_type']) or $data['rightData']['param']['list_type'] == 1) { {/php}
+				<ul class="list_1" list_type="1">
+					{volist name="$data['rightData']['search_list']['list']" id="vo"}
+					<li style="width:685px;height:168px;margin-top: 15px; margin-left: 15px;">
+						<div class="content_image">
+							<a href="{:url('/gj/index/details',['book'=>$vo.id] )}" target="_blank" >
+								<img src="{$vo.logo}" />
+							</a>
+						</div>
+						<div class="content_info">
+							<div class="info_frame" style="margin-top: 20px; " >
+								<span class="info_list" style="color:#446D6D;width:57px;">书&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</span>
+								<a href="{:url('/gj/index/details',['book'=>$vo.id] )}" target="_blank">
+									<span class="info_list" style="color:black;width:357px;">{$vo.title}</span>
+								</a>
+							</div>
+							<div class="info_frame" >
+								<span class="info_list" style="color:#446D6D;width:57px;">著&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;者:</span>
+								<!-- <a href="#"> -->
+								<span class="info_list" style="color:black;width:357px;">{$vo.id}{$vo.title}</span>
+								<!-- </a> -->
+							</div>
+							<div class="info_frame" >
+								<span class="info_list" style="color:#446D6D;width:57px;">出版机构:</span>
+								<!-- <a href="#"> -->
+									<span class="info_list" style="width:357px;">{$vo.id}{$vo.title}</span>
+								<!-- </a> -->
+							</div>
+							<div class="info_frame" >
+								<span class="info_list" style="color:#446D6D;width:57px;">出版时间:</span>
+								<!-- <a href="#"> -->
+									<span class="info_list" style="width:357px;">{$vo.id}{$vo.title}</span>
+								<!-- </a> -->
+							</div>
+						</div>
+						<div class="content_href" style="width:20px;height:121px;border-top:0px;border-right:1px solid #A8A8A8;float:right;margin-right: 15px;margin-top: 22px;" >
+							<a href="{:url('/gj/index/details',['book'=>$vo.id] )}" target="_blank" style="line-height:15px;margin:0px;width:20px;height:10px;" >阅读</a><p>
+							<a href="#" style="line-height:15px;margin:0px;width:20px;height:10px;">收藏</a><p>
+							<a href="{:url('/gj/index/details',['book'=>$vo.id] )}" target="_blank" style="line-height:15px;margin:0px;width:20px;height:10px;">详情</a>
+						</div>
+					</li>
+					{/volist}
+					<div style=" clear:both;"></div>
+				</ul>
+				{php} } else { {/php}
+				<ul class="list_1" list_type="2">
 					{volist name="$data['rightData']['search_list']['list']" id="vo" mod="2"}
 
 					{eq name="mod" value="1"}
@@ -258,7 +300,9 @@
 					<li style="margin-top: 15px; margin-left: 15px; ">
 					{/eq}
 						<div class="content_image">
-							<a href="{:url('/gj/index/details',['book'=>$vo.id] )}" target="_blank"><img src="{$vo.logo}" /></a>
+							<a href="{:url('/gj/index/details',['book'=>$vo.id] )}" target="_blank" >
+								<img src="{$vo.logo}" />
+							</a>
 						</div>
 						<div class="content_info">
 							<div class="info_frame" style="margin-top: 20px; " >
@@ -269,15 +313,21 @@
 							</div>
 							<div class="info_frame" >
 								<span class="info_list" style="color:#446D6D;width:57px;">著&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;者:</span>
-								<span class="info_list" style="color:black;">{$vo.author}</span>
+								<!-- <a href="#"> -->
+								<span class="info_list" style="color:black;">{$vo.id}{$vo.title}</span>
+								<!-- </a> -->
 							</div>
 							<div class="info_frame" >
 								<span class="info_list" style="color:#446D6D;width:57px;">出版机构:</span>
-								<span class="info_list" >{$vo.company}</span>
+								<!-- <a href="#"> -->
+									<span class="info_list">{$vo.id}{$vo.title}</span>
+								<!-- </a> -->
 							</div>
 							<div class="info_frame" >
 								<span class="info_list" style="color:#446D6D;width:57px;">出版时间:</span>
-								<span class="info_list" >1957-10-16{$vo.book_time}</span>
+								<!-- <a href="#"> -->
+									<span class="info_list">{$vo.id}{$vo.title}</span>
+								<!-- </a> -->
 							</div>
 						</div>
 						<div class="content_href">
@@ -287,34 +337,9 @@
 						</div>
 					</li>
 					{/volist}
-					<!-- <li class="content" style="margin: 5 0 0 20" >
-						<div class="content_image"><a href="#"><img src="" /></a></div>
-						<div class="content_info">
-							<div class="info_frame" style="margin: 0" >
-								<a href="#">书&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</a>
-								<span class="info_list" >aaa</span><br>
-							</div>
-							<div class="info_frame" >
-								<a href="#">著&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;者:</a>
-								<span class="info_list" >bbb</span>
-							</div>
-							<div class="info_frame" >
-								<a href="#">出版机构:</a>
-								<span class="info_list" >ccc</span>
-							</div>
-							<div class="info_frame" >
-								<a href="#">出版时间:</a>
-								<span class="info_list" >ddd</span>
-							</div>
-						</div>
-						<div class="content_href">
-							<a href="#" style="margin: 10" >阅读</a>
-							<a href="#">收藏</a>
-							<a href="#">详情</a>
-						</div>
-					</li>-->
 					<div style=" clear:both;"></div>
 				</ul>
+				{php} } {/php}
 				<div style=" clear:both;"></div>
 			</div>
 
@@ -438,6 +463,32 @@ $("span").on("click",function(){
  		return;
  		
 
+ 	} else if(class_name == 'list_1') {
+ 		window.is_type = 1;
+ 		window.list_type = value;
+
+ 		$(".is_sort").each(function(ii,vv){
+		    if ($(vv).attr('is_sort') == 1) {
+		    	is_sort = $(vv).attr('value');
+		    }
+		});
+
+ 		window.is_sort = is_sort;
+
+ 		page($(this));
+ 	} else if(class_name == 'is_sort') {
+ 		window.is_type = 2;
+ 		window.is_sort = value;
+
+ 		$(".list_1").each(function(ii,vv){
+		    if ($(vv).attr('is_type') == 1) {
+		    	list_type = $(vv).attr('value');
+		    }
+		});
+
+ 		window.list_type = list_type
+
+ 		page($(this));
  	} else if ( class_name == 'search' ) {
 
  		var checkbox = '';
@@ -534,6 +585,34 @@ function getLeftMenuCate() {
 
 }
 
+// 获取右侧内容展示条件
+function rightList() {
+
+	list_type = '';
+	is_sort = '';
+
+	// 循环获取第二分类
+	$(".list_1").each(function(ii,vv){
+	    if ($(vv).attr('is_type') == 1) {
+	    	list_type = $(vv).attr('value');
+	    }
+	});
+
+	$(".is_sort").each(function(ii,vv){
+	    if ($(vv).attr('is_sort') == 1) {
+	    	is_sort = $(vv).attr('value');
+	    }
+	});
+
+	var param = {
+		"list_type": list_type,
+		"is_sort": is_sort
+	}
+
+	return param;
+
+}
+
 // 分页提交
 function page(e) {
 
@@ -592,6 +671,17 @@ function page(e) {
 
 // 表单提交
 function submitForm(href, cate_id, cate_bid='', cate_wbid='', page='', searchValue='', checkbox='', search_page='') {
+	
+	param = {};
+    if (window.is_type == 1 || window.is_type == 2) {
+    	param['list_type'] = window.list_type;
+    	param['is_sort'] = window.is_sort;
+    } else {
+    	param = rightList();	
+    }
+    
+    console.log(param['list_type']);
+
 	// alert(checkbox);
     $("body").append("<form></form>");
     // $("body").find("form").attr("action", 'http://localhost:81'+href);
@@ -608,6 +698,7 @@ function submitForm(href, cate_id, cate_bid='', cate_wbid='', page='', searchVal
     $("body").find("form").append("<input type='text' name='" + 'search' + "' value = '" + searchValue + "'></input>");
     $("body").find("form").append("<input type='text' name='" + 'checkbox' + "' value = '" + checkbox + "'></input>");
 
+
     if ( search_page != '' ) {
 	    $("body").find("form").append("<input type='text' name='" + 'search_field[con]' + "' value = '" + search_page['con'] + "'></input>");
 	    $("body").find("form").append("<input type='text' name='" + 'search_field[type]' + "' value = '" + search_page['type'] + "'></input>");
@@ -617,6 +708,9 @@ function submitForm(href, cate_id, cate_bid='', cate_wbid='', page='', searchVal
 	    $("body").find("form").append("<input type='text' name='" + 'search_field[cate_wbid]' + "' value = '" + search_page['cate_wbid'] + "'></input>");
 	    $("body").find("form").append("<input type='text' name='" + 'search_field[search_name]' + "' value = '" + search_page['search_name'] + "'></input>");
 	    $("body").find("form").append("<input type='text' name='" + 'search_field[checkbox]' + "' value = '" + search_page['checkbox'] + "'></input>");
+	    $("body").find("form").append("<input type='text' name='" + 'check_type[list_type]' + "' value = '" + param['list_type'] + "'></input>");
+
+    	$("body").find("form").append("<input type='text' name='" + 'check_type[is_sort]' + "' value = '" + param['is_sort'] + "'></input>");
     }
 
     $("body").find("form").submit();
