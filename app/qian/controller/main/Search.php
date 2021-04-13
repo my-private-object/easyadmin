@@ -41,6 +41,13 @@ class Search {
             $param['is_sort'] = 3;
         }
 
+        // 列表的排序方式
+        if ( empty($post['check_type']['is_asc']) || $post['check_type']['is_asc'] = 'asc' ) {
+            $param['is_asc'] = 'asc';
+        } else {
+            $param['is_asc'] = 'desc';
+        }
+
 		// 分页搜索
 		$page_data = $this->sidePage->myPage($this->model, $condition, $now_page, $param['is_sort']);
 		// dump($condition);

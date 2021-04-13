@@ -216,21 +216,39 @@
 						<span style="margin-left: 20px" >
 
 							{if condition="$data['rightData']['param']['is_sort'] eq 3 "}
-							<span class="is_sort" href="{:url('/gj/index/searchPage')}" style="color:red;cursor:pointer;" value="3" is_sort="1">点击量排序</span>
+							<span class="is_sort" href="{:url('/gj/index/searchPage')}" style="color:red;cursor:pointer;" value="3" is_sort="1">题名</span>
 							{else /}
-							<span class="is_sort" href="{:url('/gj/index/searchPage')}" style="cursor:pointer;" value="3" is_sort="0">点击量排序</span>
+							<span class="is_sort" href="{:url('/gj/index/searchPage')}" style="cursor:pointer;" value="3" is_sort="0">题名</span>
 							{/if}
-							 / 
+							{if condition="$data['rightData']['param']['is_sort'] eq 3 and $data['rightData']['param']['is_asc'] eq 'asc' "}
+							<span style="color:red;">↑</span>
+							{/if}
+							{if condition="$data['rightData']['param']['is_sort'] eq 3 and $data['rightData']['param']['is_asc'] eq 'asc' "}
+							<span style="color:red;">↓</span>
+							{/if}
+
 							{if condition="$data['rightData']['param']['is_sort'] eq 2 "}
-							<span class="is_sort" href="{:url('/gj/index/searchPage')}" style="color:red;cursor:pointer;" value="2" is_sort="1">首字母排序</span>
+							<span class="is_sort" href="{:url('/gj/index/searchPage')}" style="color:red;cursor:pointer;" value="2" is_sort="1">日期</span>
 							{else /}
-							<span class="is_sort" href="{:url('/gj/index/searchPage')}" style="cursor:pointer;" value="2" is_sort="0">首字母排序</span>
+							<span class="is_sort" href="{:url('/gj/index/searchPage')}" style="cursor:pointer;" value="2" is_sort="0">日期</span>
 							{/if}
-							 / 
+							{if condition="$data['rightData']['param']['is_sort'] eq 2 and $data['rightData']['param']['is_asc'] eq 'asc' "}
+							<span style="color:red;">↑</span>
+							{/if}
+							{if condition="$data['rightData']['param']['is_sort'] eq 2 and $data['rightData']['param']['is_asc'] eq 'asc' "}
+							<span style="color:red;">↓</span>
+							{/if}
+
 							{if condition="$data['rightData']['param']['is_sort'] eq 1 "}
-							<span class="is_sort" href="{:url('/gj/index/searchPage')}" style="color:red;cursor:pointer;" value="1" is_sort="1">时间排序</span>
+							<span class="is_sort" href="{:url('/gj/index/searchPage')}" style="color:red;cursor:pointer;" value="1" is_sort="1">地域</span>
 							{else /}
-							<span class="is_sort" href="{:url('/gj/index/searchPage')}" style="cursor:pointer;" value="1" is_sort="0">时间排序</span>
+							<span class="is_sort" href="{:url('/gj/index/searchPage')}" style="cursor:pointer;" value="1" is_sort="0">地域</span>
+							{/if}
+							{if condition="$data['rightData']['param']['is_sort'] eq 1 and $data['rightData']['param']['is_asc'] eq 'asc' "}
+							<span style="color:red;">↑</span>
+							{/if}
+							{if condition="$data['rightData']['param']['is_sort'] eq 1 and $data['rightData']['param']['is_asc'] eq 'asc' "}
+							<span style="color:red;">↓</span>
 							{/if}
 
 						</span>

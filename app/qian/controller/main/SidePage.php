@@ -201,11 +201,19 @@ class SidePage {
             $param['is_sort'] = 3;
         }
 
+        // 列表的排序方式 
+        if ( empty($post['check_type']['is_asc']) || $post['check_type']['is_asc'] == 'asc' ) {
+            $param['is_asc'] = 'asc';
+        } else {
+            echo 321;
+            $param['is_asc'] = 'desc';
+        }
+        echo $param['is_asc'];
         // 创建模型实例
         $books = new \app\admin\model\GujiBooks;
 
         // 自己写分页输出
-        $page_data = $this->myPage($books, $condition, $now_page, $param['is_sort']);
+        $page_data = $this->myPage($books, $condition, $now_page, $param);
 
         // var_dump($page_data['page']);
         // var_dump($condition);
@@ -297,14 +305,15 @@ class SidePage {
         } else {
             $search_num = ($now_page - 1) * 8;
         }
-
+        // dump($param['is_asc']);
+        // exit();
         // 指定排序语句
-        if ($param == 3) {
-            $order = 'book_time desc';
-        } else if ($param == 2) {
-            $order = 'header_sort desc';
-        } else if ($param == 1) {
-            $order = 'click desc';
+        if ($param['is_sort'] == 3) {
+            $order = 'publi_sher_urb '.$param['is_asc'];
+        } else if ($param['is_sort'] == 2) {
+            $order = 'book_time '.$param['is_asc'];
+        } else if ($param['is_sort'] == 1) {
+            $order = 'title '.$param['is_asc'];
         }
 
         // var_dump($search_num);

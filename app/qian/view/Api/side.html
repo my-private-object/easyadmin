@@ -198,21 +198,50 @@
 						<span style="margin-left: 20px" >
 
 							{if condition="$data['rightData']['param']['is_sort'] eq 3 "}
-							<span class="is_sort" href="{:url('/gj/index/sidepage')}" style="color:red;cursor:pointer;" value="3" is_sort="1">点击量排序</span>
+							<span class="is_sort" href="{:url('/gj/index/sidepage')}" style="color:red;cursor:pointer;" value="3" is_sort="1">题名</span>
 							{else /}
-							<span class="is_sort" href="{:url('/gj/index/sidepage')}" style="cursor:pointer;" value="3" is_sort="0">点击量排序</span>
+							<span class="is_sort" href="{:url('/gj/index/sidepage')}" style="cursor:pointer;" value="3" is_sort="0">题名</span>
 							{/if}
-							 / 
+							{if condition="$data['rightData']['param']['is_sort'] eq 3 "}
+								{if condition="$data['rightData']['param']['is_asc'] eq 'asc' "}
+								<span class="is_asc" style="color:red;" is_asc="asc" value="3" is_asc_o="yes">↑</span><span>↓</span>
+								{else /}
+								<span>↑</span><span class="is_asc" style="color:red;" is_asc="desc" value="3" is_asc_o="yes">↓</span>
+								{/if}
+							{else /}
+								<span>↑↓</span>
+							{/if}
+
+							<span>&nbsp;&nbsp;</span>
 							{if condition="$data['rightData']['param']['is_sort'] eq 2 "}
-							<span class="is_sort" href="{:url('/gj/index/sidepage')}" style="color:red;cursor:pointer;" value="2" is_sort="1">首字母排序</span>
+							<span class="is_sort" href="{:url('/gj/index/sidepage')}" style="color:red;cursor:pointer;" value="2" is_sort="1">日期</span>
 							{else /}
-							<span class="is_sort" href="{:url('/gj/index/sidepage')}" style="cursor:pointer;" value="2" is_sort="0">首字母排序</span>
+							<span class="is_sort" href="{:url('/gj/index/sidepage')}" style="cursor:pointer;" value="2" is_sort="0">日期</span>
 							{/if}
-							 / 
-							{if condition="$data['rightData']['param']['is_sort'] eq 1 "}
-							<span class="is_sort" href="{:url('/gj/index/sidepage')}" style="color:red;cursor:pointer;" value="1" is_sort="1">时间排序</span>
+							{if condition="$data['rightData']['param']['is_sort'] eq 2 "}
+								{if condition="$data['rightData']['param']['is_asc'] eq 'asc' "}
+								<span class="is_asc" style="color:red;" is_asc="asc" value="2" is_asc_o="yes">↑</span><span>↓</span>
+								{else /}
+								<span>↑</span><span class="is_asc" style="color:red;" is_asc="desc" value="2" is_asc_o="yes">↓</span>
+								{/if}
 							{else /}
-							<span class="is_sort" href="{:url('/gj/index/sidepage')}" style="cursor:pointer;" value="1" is_sort="0">时间排序</span>
+								<span is_asc_o="no">↑↓</span>
+							{/if}
+
+							<span>&nbsp;&nbsp;</span>
+							{if condition="$data['rightData']['param']['is_sort'] eq 1 "}
+							<span class="is_sort" href="{:url('/gj/index/sidepage')}" style="color:red;cursor:pointer;" value="1" is_sort="1">地域</span>
+							{else /}
+							<span class="is_sort" href="{:url('/gj/index/sidepage')}" style="cursor:pointer;" value="1" is_sort="0">地域</span>
+							{/if}
+							{if condition="$data['rightData']['param']['is_sort'] eq 1 "}
+								{if condition="$data['rightData']['param']['is_asc'] eq 'asc' "}
+								<span class="is_asc" style="color:red;" is_asc="asc" value="1" is_asc_o="yes">↑</span><span>↓</span>
+								{else /}
+								<span>↑</span><span class="is_asc" style="color:red;" is_asc="desc" value="1" is_asc_o="yes">↓</span>
+								{/if}
+							{else /}
+								<span>↑↓</span>
 							{/if}
 
 						</span>
@@ -435,6 +464,29 @@ $("span").on("click",function(){
 		    }
 		});
 
+ 		$(".is_asc").each(function(ii,vv){
+ 			if ($(vv).attr('is_asc_o') == 'yes' ) {
+ 				if ($(vv).attr('value') == is_sort) {
+			    	asc_is_me = 'yes';
+			    	if ($(vv).attr('is_asc') == 'asc') {
+			    		is_asc = 'desc';
+			    	} else {
+			    		is_asc = 'asc';
+			    	}
+			    } else {
+			    	asc_is_me = 'no';
+			    	is_asc = 'asc';
+			    }
+ 			}
+		});
+
+		// 未完待续
+ 		console.log(asc_is_me);
+ 		console.log(is_asc);
+ 		// return;
+ 		window.asc_is_me = asc_is_me;
+ 		window.is_asc = is_asc;
+
  		window.list_type = list_type
 
  		listTypePage($(this));
@@ -591,11 +643,29 @@ function rightList() {
 	    }
 	});
 
+	$(".is_asc").each(function(ii,vv){
+		if ($(vv).attr('is_asc_o') == 'yes' ) {
+			if ($(vv).attr('value') == is_sort) {
+		    	asc_is_me = 'yes';
+		    	if ($(vv).attr('is_asc') == 'asc') {
+		    		is_asc = 'asc';
+		    	} else {
+		    		is_asc = 'desc';
+		    	}
+		    } else {
+		    	asc_is_me = 'no';
+		    	is_asc = 'asc';
+		    }
+		}
+	});
+
 	var param = {
 		"list_type": list_type,
-		"is_sort": is_sort
+		"is_sort": is_sort,
+		"asc_is_me": asc_is_me,
+		"is_asc": is_asc
 	}
-
+	alert(param);
 	return param;
 
 }
@@ -622,6 +692,8 @@ function submitForm(href, cate_id, cate_bid='', cate_wbid='', page='', searchVal
     if (window.is_type == 1 || window.is_type == 2) {
     	param['list_type'] = window.list_type;
     	param['is_sort'] = window.is_sort;
+    	param['asc_is_me'] = window.asc_is_me;
+    	param['is_asc'] = window.is_asc;
     } else {
     	param = rightList();	
     }
@@ -631,6 +703,10 @@ function submitForm(href, cate_id, cate_bid='', cate_wbid='', page='', searchVal
     $("body").find("form").append("<input type='text' name='" + 'check_type[list_type]' + "' value = '" + param['list_type'] + "'></input>");
 
     $("body").find("form").append("<input type='text' name='" + 'check_type[is_sort]' + "' value = '" + param['is_sort'] + "'></input>");
+
+    $("body").find("form").append("<input type='text' name='" + 'check_type[asc_is_me]' + "' value = '" + param['asc_is_me'] + "'></input>");
+
+    $("body").find("form").append("<input type='text' name='" + 'check_type[is_asc]' + "' value = '" + param['is_asc'] + "'></input>");
 
     $("body").find("form").submit();
 
