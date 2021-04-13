@@ -16,7 +16,9 @@ class Search {
 
 	// 普通搜索
 	public function lowSearch() {
-
+		// echo $this->post['check_type']['is_asc'];
+  //       echo 123123123;
+  //       exit();
 		// 获取页数
 		$now_page = $this->nowPage();
 
@@ -42,14 +44,14 @@ class Search {
         }
 
         // 列表的排序方式
-        if ( empty($post['check_type']['is_asc']) || $post['check_type']['is_asc'] = 'asc' ) {
+        if ( empty($this->post['check_type']['is_asc']) || $this->post['check_type']['is_asc'] == 'asc' ) {
             $param['is_asc'] = 'asc';
         } else {
             $param['is_asc'] = 'desc';
         }
-
+        echo $param['is_asc'];
 		// 分页搜索
-		$page_data = $this->sidePage->myPage($this->model, $condition, $now_page, $param['is_sort']);
+		$page_data = $this->sidePage->myPage($this->model, $condition, $now_page, $param);
 		// dump($condition);
 		// 拦截多个分类 - 多个分类只用 空 来表示
 		if ( isset($condition['field']['cate_id']) && is_array($condition['field']['cate_id']) ) {

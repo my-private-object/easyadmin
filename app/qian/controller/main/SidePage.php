@@ -158,7 +158,7 @@ class SidePage {
 
         $post = $_POST;    
         dump($post);
-
+        
         // 判断 left_cate 是否存在 并生成查询条件
         if (!empty($post['left_cate'])){
             // 去掉空值
@@ -315,7 +315,8 @@ class SidePage {
         } else if ($param['is_sort'] == 1) {
             $order = 'title '.$param['is_asc'];
         }
-
+        // dump($order);
+        // exit();
         // var_dump($search_num);
         if ( !empty($condition['action']) and $condition['action'] == 'search' ) {
             // 查询搜索分页数据
